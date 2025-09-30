@@ -42,7 +42,7 @@ document.getElementById("viewProfileBtn").addEventListener("click", () => {
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("loggedInUser");
-  window.location.href = "../login.html";
+  window.location.href = "../index.html";
 });
 
 
