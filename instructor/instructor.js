@@ -11,7 +11,7 @@ if (user && user.role === "instructor") {
   document.getElementById("user-fullname").textContent =
     `${user.firstName} ${user.lastName}`;
 } else {
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 //remove user
