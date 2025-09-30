@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel = "stylesheet" href = "../styles.css">
+</head>
+
+<body class="admin-dashboard">
+    <header>
+        Learning Management System
+
+    <div class = "header-right">
+        <div class = "user-menu">
+          <button class = "user-btn">Admin ▾</button>
+          
+          <div class = "dropdown-content">
+            <div class="user-info">
+              <strong id="user-fullname">Admin Name</strong><br>
+              <small>Student</small>
+            </div>
+            <hr>
+            <button class="dropdown-btn" id="viewProfileBtn">View Profile</button>
+            <button class="dropdown-btn" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <h1>Admin Dashboard</h1>
+
+  <p id = "welcome-message"></p>
+  <script src = "admin.js"></script>
+</body>
+</html>

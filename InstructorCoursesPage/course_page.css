@@ -1,0 +1,253 @@
+  body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+  }
+
+  header {
+    background-color: #09244d; 
+    color: white;
+    padding: 30px;
+    font-weight: bold;
+  }
+      
+  h1 {
+    margin: 0;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    background-color: #09244d;
+    font-weight: bold;
+    font-size: 50px;
+  }
+
+  .content {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+  }
+
+  .button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+  }
+
+  .button:hover {
+      background-color: #0056b3;
+  }
+
+  .button-container {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+  }
+
+  button#createCourseBtn {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+  }
+
+  button#createCourseBtn:hover {
+      background-color: #0056b3;
+  }
+
+  #courses-container {
+      gap: 20px;
+      text-align: center;
+      padding-top: 10px;
+      margin: 0;
+  }
+
+  /* Slim down course card to match lesson card */
+  .course-card {
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px; /* reduce from 20px */
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1); /* slightly smaller shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* reduce gap */
+
+  }
+
+  .course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15); /* smaller hover shadow */
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .course-title {
+    font-size: 1.3rem; /* smaller than before */
+    font-weight: 600;
+    color: #09244d;
+    margin: 0 0 4px 0;
+  }
+
+
+  .course-id, .course-owner, .course-credits {
+    font-size: 0.95rem; /* slightly smaller */
+    margin: 2px 0;
+  }
+
+  .course-credits {
+    font-weight: 600;
+    color: #007bff;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* less gap to tighten layout */
+  }
+
+  .course-header {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #09244d;
+    margin-bottom: 5px;
+  }
+
+  .course-card h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+  }
+
+  .course-card p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 5px 0;
+    color: black;
+  }
+
+  .course-info p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 3px 0;
+    color: #444;
+  }
+
+  .center-button {
+      text-align: center;
+      margin-top: 30px;
+  }
+
+  .center-button .button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+  }
+
+  .center-button .button:hover {
+      background-color: #0056b3;
+  }
+
+  #courses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .menu-btn {
+      font-size: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+  }
+
+  /* dropdown menu */
+  .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 36px;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      flex-direction: column;
+      z-index: 10;
+  }
+
+  .dropdown-menu button {
+      padding: 5px 10px;
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: none;
+      cursor: pointer;
+  }
+
+  .dropdown-menu button:hover {
+      background-color: #eee;
+  }
+
+  /* Show menu when toggled */
+  .dropdown-menu.show {
+      display: flex;
+  }
+
+  .draft-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0); /* subtle gradient */
+    color: #555;             /* darker gray for readability */
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    padding: 4px 10px;
+    border-radius: 999px;    /* pill shape */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* soft shadow */
+    letter-spacing: 0.5px;   /* subtle spacing for cleaner look */
+  }
+
+  .publish-btn {
+      display: block;
+      width: 60%; /* Adjust width for consistency */
+      padding: 10px;
+      background-color: #123261; /* Dark blue color */
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 20px auto 10px;
+  }
+
+  /* Optional: Add hover effect for better user experience */
+  .publish-btn:hover {
+      background-color: #0d2140; /* A slightly darker blue on hover */
+  }

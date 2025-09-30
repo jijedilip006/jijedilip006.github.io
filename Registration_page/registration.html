@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registration — Learning Management System</title>
+  <link rel="stylesheet" href="registration.css" />
+</head>
+<body>
+  <header>Learning Management System</header>
+
+  <h1>Registration Page</h1>
+
+  <form id="registerForm">
+
+    <div class="form-header">
+        <a href="../Login page/login.html" class="btn-secondary cancel-link">Cancel</a>
+    </div>
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <select id="title" required>
+          <option value="" disabled selected>Select one</option>
+          <option>Mr</option>
+          <option>Ms</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" placeholder="First Name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" placeholder="Last Name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+
+      <div class="form-group">
+        <label>Role</label>
+        <div class="radio-inline">
+          <label><input type="radio" name="role" value="student" required> Student</label>
+          <label><input type="radio" name="role" value="instructor" required> Instructor</label>
+        </div>
+      </div>
+
+      <button type="submit">Register</button>
+  </form>
+  
+    <script type="module" src="./registration.js"></script>
+</body>
+</html>

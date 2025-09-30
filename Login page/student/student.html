@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+  <link rel = "stylesheet" href = "../styles.css">
+
+</head>
+<body class="student-dashboard">
+    <header>
+        Learning Management System
+    
+
+    <div class = "header-right">
+        <div class = "user-menu">
+          <button class = "user-btn">Student ▾</button>
+          
+          <div class = "dropdown-content">
+            <div class="user-info">
+              <strong id="user-fullname">Student Name</strong><br>
+              <small>Student</small>
+            </div>
+            <hr>
+            <button class="dropdown-btn" id="viewProfileBtn">View Profile</button>
+            <button class="dropdown-btn" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <h1>Student Dashboard</h1>
+  <p id = "welcome-message"></p>
+  <h2>Your Courses</h2>
+
+   <div id="course-status"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";
+    const supabase = window.supabase.createClient('https://mavdxyhwlfyzyarukwbr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ');
+  </script>
+  <script src="student.js"></script>
+  
+</body>
+</html>

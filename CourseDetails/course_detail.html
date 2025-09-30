@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Details</title>
+  <link rel="stylesheet" href="course_detail.css">
+</head>
+
+<body>
+    <header>
+        Learning Management System
+    </header>
+
+    <h1>Course Details</h1>
+    <main class="content">
+        <!-- Course Title -->
+        <h2 id="course-title">Title</h2>
+
+        <!-- Course Meta -->
+        <div class="course-meta">
+            <p><strong>ID:</strong> <span id="course-id"></span></p>
+            <p><strong>Description:</strong> <span id="course-description"></span></p>
+            <p><strong>Total Credit Points:</strong> <span id="total-credits">0</span></p>
+        </div>
+
+        <!-- Lessons Section -->
+        <section class="lessons-section">
+            <h2>Lessons in this Course</h2>
+            <div id="lessons-list" class="lessons-list">
+                <p>No lessons yet.</p>
+            </div>
+        </section>
+
+        <!-- Back Button -->
+        <div class="center-button">
+        <a href="../InstructorCoursesPage/course_page.html" class="button">Back to Courses</a>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
+     <script>
+     const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";   // replace
+     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";              // replace
+     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+     </script>
+     <script src="course_details.js"></script>
+
+</body>
+</html>

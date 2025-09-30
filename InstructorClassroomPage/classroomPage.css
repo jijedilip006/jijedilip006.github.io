@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+header {
+    background-color: #09244d; 
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+    
+h1 {
+    margin: 0;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    background-color: #09244d;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+#classroom-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    padding: 0 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.classroom-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.classroom-id-title{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+}
+
+.card p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 5px 0;
+    color: black;
+}
+
+.card {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* Create Classroom button at top-right */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+}
+
+#createClassroomBtn {
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#createClassroomBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Go back button centering */
+.center-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.center-button .button {
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.center-button .button:hover {
+    background-color: #0056b3;
+}
+
+.dots-btn {
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dots-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.menu-content button {
+    padding: 5px 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+}

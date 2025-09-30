@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Courses </title>
+    <link rel="stylesheet" href="course_page.css">
+</head>
+
+<body>
+    <header>
+        Learning Management System
+    </header>
+
+    <h1>Courses Page</h1>
+
+    <main class="content">
+        <div class="button-container">
+            <a href="../CreateCourse/create_course.html" class="button" id="createCourseBtn">Create Course</a>
+        </div>
+
+        <div id="courses-container"></div>
+
+        <p id="no-courses-msg" style="text-align:center; margin:5px 0;">
+            No courses yet. Click Create Course to create one.
+        </p>
+
+        <div class="center-button">
+            <a href = "../Login page/instructor/instructor.html" class = "button" id = "instructor_pageBtn">Go back to Instructor page</a>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
+    <script>
+    const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ"; // replace with your key
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    </script>
+    <script src="course_page.js"></script>
+
+</body>
+</html>

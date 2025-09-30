@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classroom</title>
+    <link rel="stylesheet" href="classroomPage.css">
+</head>
+
+<body>
+    <header>
+        Learning Management System
+    </header>
+
+    <h1>Classroom Page</h1>
+
+    <main class="content">
+        <div class="button-container">
+            <a href="../ClassroomPage/classroom_page.html" class="button" id="createClassroomBtn">Create Classroom</a>
+        </div>
+
+        <div id="classroom-container"></div>
+
+        <p id="no-classroom-msg" style="text-align:center; margin:5px 0;">
+            No classrooms yet. Click Create Classroom to create one.
+        </p>
+        
+
+        <div class="center-button">
+            <a href="../Login page/instructor/instructor.html" class="button">Go back to Instructor page</a>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
+    <script>
+    const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";   // replace
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";              // replace
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    </script>
+
+<script src="classroomPage.js"></script>
+</body>
+</html>

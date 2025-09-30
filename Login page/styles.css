@@ -1,0 +1,955 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+.login-page header {
+    color: white;
+    background-color: #09244d;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.login-page h1 {
+    margin: 0;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    background-color: #09244d;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.login-page form {
+    background-color: white;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    border-width: 12px;
+    box-shadow: 0 6px 20px rgb(76, 76, 77);
+    
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #000000;
+    text-align: center;   
+}
+
+input, textarea, select {
+    width: 70%;         
+    padding: 8px;
+    font-size: inherit;
+    display: block;     
+    margin: 0 auto;    
+}
+
+.login-page button {
+    display: block;
+    width: 95%;
+    padding: 14px;
+    background-color: #123261;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    margin: 6px;
+}
+
+.button , .unenroll-btn{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    margin: 6px;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+a{
+    text-align: center;
+}
+
+.instructor-dashboard header {
+  color: white;
+  background-color: #09244d;
+  font-weight: bold;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.instructor-dashboard h1 {
+  margin: 0;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  background-color: #09244d;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.instructor-dashboard .dashboard-links {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.instructor-dashboard .button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  margin: 20px;
+  text-align: center;
+}
+
+.instructor-dashboard .button:hover {
+  background-color: #0056b3;
+}
+
+.instructor-dashboard .user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.instructor-dashboard .user-btn {
+  background: #09244d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+.instructor-dashboard .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: white;
+  min-width: 220px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 10;
+  padding: 15px;
+}
+
+.instructor-dashboard .user-info {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.instructor-dashboard .user-info strong {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #09244d;
+}
+
+.instructor-dashboard .user-info small {
+  font-size: 14px;
+  color: #666;
+}
+
+.instructor-dashboard .dropdown-content a {
+  border: 1px solid #ddd;
+}
+
+.instructor-dashboard .dropdown-content a:hover {
+  background: #f4f6f9;
+}
+
+.instructor-dashboard .dropdown-content.show {
+  display: block;
+}
+
+.instructor-dashboard .dropdown-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.instructor-dashboard .dropdown-btn:hover {
+  background: #f4f6f9;
+}
+
+.instructor-dashboard .dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.instructor-dashboard .dash-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.instructor-dashboard .dash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.instructor-dashboard .dash-card h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #09244d;
+}
+
+.instructor-dashboard .dash-card p {
+  color: #555;
+  margin: 1rem 0 1.5rem;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .instructor-dashboard .dashboard-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .instructor-dashboard .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.register-link {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: normal;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.student-dashboard header {
+  color: white;
+  background-color: #09244d;
+  font-weight: bold;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.student-dashboard h1 {
+  margin: 0;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  background-color: #09244d;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.student-dashboard .button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  margin: 20px;
+  text-align: center;
+}
+
+.student-dashboard .button:hover {
+  background-color: #0056b3;
+}
+
+.student-dashboard .user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.student-dashboard .user-btn {
+  background: #09244d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+.student-dashboard .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: white;
+  min-width: 220px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 10;
+  padding: 15px;
+}
+
+.student-dashboard .user-info {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.student-dashboard .user-info strong {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #09244d;
+}
+
+.student-dashboard .user-info small {
+  font-size: 14px;
+  color: #666;
+}
+
+.student-dashboard .dropdown-content a {
+  border: 1px solid #ddd;
+}
+
+.student-dashboard .dropdown-content a:hover {
+  background: #f4f6f9;
+}
+
+.student-dashboard .dropdown-content.show {
+  display: block;
+}
+
+.student-dashboard .dropdown-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.student-dashboard .dropdown-btn:hover {
+  background: #f4f6f9;
+}
+
+h2 {
+  margin-left: 3rem;
+  text-align: left;
+}
+
+.admin-dashboard header {
+  color: white;
+  background-color: #09244d;
+  font-weight: bold;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-dashboard h1 {
+  margin: 0;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  background-color: #09244d;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.admin-dashboard .button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  margin: 20px;
+  text-align: center;
+}
+
+.admin-dashboard .button:hover {
+  background-color: #0056b3;
+}
+
+.admin-dashboard .user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.admin-dashboard .user-btn {
+  background: #09244d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+.admin-dashboard .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: white;
+  min-width: 220px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 10;
+  padding: 15px;
+}
+
+.admin-dashboard .user-info {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.admin-dashboard .user-info strong {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #09244d;
+}
+
+.admin-dashboard .user-info small {
+  font-size: 14px;
+  color: #666;
+}
+
+.admin-dashboard .dropdown-content a {
+  border: 1px solid #ddd;
+}
+
+.admin-dashboard .dropdown-content a:hover {
+  background: #f4f6f9;
+}
+
+.admin-dashboard .dropdown-content.show {
+  display: block;
+}
+
+.admin-dashboard .dropdown-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.admin-dashboard .dropdown-btn:hover {
+  background: #f4f6f9;
+}
+
+
+#course-status {
+  max-width: 600px;
+  margin: 2rem 0 0 2rem;   
+  text-align: left;   
+}
+
+.course-box,
+.enroll-box {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;            
+  max-width: 500px; 
+}
+
+.course-box:hover,
+.enroll-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.enroll-box h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.course-box p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #000000;
+}
+
+.course-box .course-id {
+  font-size: 1.5rem;   /* bigger than the rest */
+  font-weight: bold;
+  color: #000000;      /* dark highlight color */
+}
+
+.course-box .course-owner {
+  font-size: 1rem;
+  color: #000000;
+}
+
+.enroll-box .button {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.6rem 1.2rem;
+  background: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 165px;
+  transition: background 0.2s ease;
+}
+
+.enroll-box .button:hover {
+  background:#0056b3;
+}
+.logout-container {
+  margin: 2rem 0 0 2rem;  
+  text-align: left;       
+
+.logout-container .button {
+  background: #1404c2;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.logout-container .button:hover {
+  background: #082ce0;
+}
+}
+
+.course-list {
+  display: grid;  
+  grid-template-columns: repeat(3, 1fr); /* max 3 per row */
+  gap: 2rem;  
+  padding: 2rem;
+  justify-content: center;    
+}
+
+.course-box1 {
+  background: none;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+.course-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.8rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.course-card h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #09244d;
+}
+
+.course-card p {
+  margin: 0.3rem 0;
+  font-size: 1.0rem;
+  color: #000000;
+  text-align: left;
+  font-weight: normal;
+}
+
+.course-card .enroll-btn {
+  margin-top: 1rem;
+  align-self: flex-start;
+  padding: 0.6rem 1.2rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.course-card .enroll-btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .course-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row on medium screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .course-list {
+    grid-template-columns: 1fr; /* 1 per row on small screens */
+  }
+}
+
+.enroll-page header {
+  color: white;
+  background-color: #09244d;
+  font-weight: bold;
+  padding: 30px;
+}
+
+.enroll-page header h1 {
+  margin: 0;
+  color: white;
+  padding: 30px;
+  text-align: center;
+  background-color: #09244d;
+  font-weight: bold;
+  font-size: 50px;         
+}
+
+.lessons-page {
+  background: #f4f6f9;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+.lessons-page header {
+    color: white;
+    background-color: #09244d;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.lessons-page #course-title {
+  margin: 0;
+  color: white;
+  font-size: 50px;  /* match login page */
+  font-weight: bold;
+}
+
+.lessons-page .button {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #4a90e2;
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.lessons-page .button:hover {
+  background-color: #357ac9;
+}
+
+.lessons-page #lessons-container {
+  max-width: none;          
+  width: 90%;               
+  margin: 0 auto;           
+  display: flex;
+  flex-direction: column; 
+  margin-top: 30px;  
+  gap: 1rem;
+}
+
+.lessons-page .lesson-card {
+  width: 100%;             
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s ease;
+  display: flex;           
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.lessons-page .lesson-card:hover {
+  background: #f9f9f9;
+  transform: none;         
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.lessons-page .lesson-card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #09244d;
+}
+
+.lessons-page .lesson-card p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;}
+
+.lessons-page .lesson-card h3 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #09244d;
+  margin: 0 0 0.5rem 0;
+  text-align: left;
+}
+
+.lesson-link {
+  text-decoration: none;
+  color: inherit;
+  display: block; }
+
+body.lesson-detail-page {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f9fafc;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.lesson-detail-page header {
+  color: white;
+    background-color: #09244d;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.lesson-detail-page header h1 {
+    margin: 0;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    background-color: #09244d;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+/* Left-aligned compact box for basic info */
+.lesson-basic-info {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: 1200px;
+  margin: 40px auto 10px auto;
+  padding: 20px;
+  text-align: left;
+  font-size: 20px;   /* 🔹 bigger font for everything inside */
+  line-height: 1.6;  /* 🔹 nicer spacing between lines */
+}
+
+.lesson-basic-info p {
+  margin: 4px 0;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.lesson-main-details ul {
+  list-style-type: disc;   /* normal dot */
+  margin: 0;               /* remove extra spacing */
+  padding-left: 18px;      /* bring the bullet closer to the text */
+}
+
+.lesson-main-details li {
+  margin-bottom: 6px;      /* spacing between items */
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.list-item{
+  font-size: 2rem;
+  padding: 3px;
+}
+
+
+.done-box {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.done-box input[type="checkbox"] {
+  display: none;
+}
+
+.done-box label {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #e0e0e0;
+  color: #333;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.done-box input[type="checkbox"]:checked + label {
+  background: #056608;
+  color: white;
+  border-color: #065d09;
+}
+
+.lock-icon {
+  font-size: 40px;        
+  margin-left: 10px;     
+  color: #888;             
+}
+.lesson-link.locked {
+  opacity: 0.6;            
+  pointer-events: none;     
+}
+
+/* Student List Container */
+#student-list-box {
+  margin-top: 40px;
+  width: 90%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#student-list-box h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+#student-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+  justify-content: center;
+}
+
+#student-list li {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  min-width: 220px;
+  max-width: 250px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+
+#student-list li strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #111;
+}
+
+#student-list li small {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+#course-title {
+  margin: 0;
+  color: white;
+  padding: 30px;
+  text-align: center;
+  background-color: #09244d;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.back-btn {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.back-btn .button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-btn .button:hover {
+  background-color: #0056b3;
+}

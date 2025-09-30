@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+header {
+    color: white;
+    background-color: #09244d;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.btn-secondary {
+  background-color: #ccc;
+  color: black;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: 5px;
+  font-weight: bold;
+}
+
+.form-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #999;
+}
+
+h1 {
+    margin: 0;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    background-color: #09244d;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+form {
+    background-color: white;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    border-width: 12px;
+    box-shadow: 0 6px 20px rgb(76, 76, 77);
+    
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #000000;
+    text-align: left;   
+    width: 70%;         
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.radio-inline {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; 
+  gap: 24px;                
+}
+
+.radio-inline label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;    
+  margin: 0;   
+  width: auto;  
+  font-weight: 600;
+  text-align: left;
+}
+
+.radio-inline input[type="radio"] {
+  margin: 0;
+}
+
+input, textarea, select {
+    width: 70%;         
+    padding: 8px;
+    font-size: inherit;
+    display: block;     
+    margin: 0 auto;    
+}
+
+button {
+    display: block;
+    width: 95%;
+    padding: 14px;
+    background-color: #123261;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    margin: 6px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    margin: 6px;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+a{
+    text-align: center;
+}

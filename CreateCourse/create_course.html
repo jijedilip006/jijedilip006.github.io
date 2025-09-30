@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Create Course</title>
+    <link rel = "stylesheet" href = "create_course.css">
+</head>
+
+<body>
+    <header>
+        Learning Management System
+    </header>
+
+    <h1>Create Course</h1>
+
+    <form id = "courseForm">
+        <div class="form-header">
+            <a href="../InstructorCoursesPage/course_page.html" class="cancel-link">cancel</a>
+            <a href="#" class="save-and-close" id="save-and-close">Save & Close</a>
+        </div>
+    
+            <div class = "row">
+                <div class = "column">
+                    <div class = "form-group">
+                        <label for = "ID">Course ID</label>
+                        <input type = "text" id = "ID" name = "ID" required>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="form-group">
+                      <label for="title">Course Title</label>
+                      <input type="text" id="title" name="title" required>
+                    </div>
+                  </div>
+
+                <div class = "column">
+                    <div class="form-group">
+                        <label for="owner">Owner of Course</label>
+                        <select id="owner" name="owner" required>
+                          <!-- Will be filled dynamically -->
+                        </select>
+                      </div>
+                </div>
+            </div>
+            <div class = "form-group">
+                <fieldset>
+                    <legend>Lessons</legend>
+                    <div id="lesson"></div> <!-- checkboxes will be added here -->
+                  </fieldset>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Course Description</label>
+                <textarea id="description" name="description" rows="4" placeholder="Enter course description..." required ></textarea>
+            </div>
+
+
+
+        <button type = "submit" id="create-course">Create Course</button>
+    </form>
+    <center><a href = "../Login page/instructor/instructor.html" class = "button" id = "instructor_pageBtn">Go back to Instructor page</a></center>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
+     <script>
+     const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";   // replace
+     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";              // replace
+     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+     </script>
+     <script src="create_course.js"></script>
+
+</body>
+</html>

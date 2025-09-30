@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Classroom</title>
+    <link rel="stylesheet" href="classroom.css">
+</head>
+
+<body class="create-classroom">
+    <header>
+        Lesson Management System
+    </header>
+
+    <h1>Create Classroom</h1>
+
+<form id="classroomForm">
+    <div class="form-header">
+        <a href="../InstructorClassroomPage/classroomPage.html" class="btn-secondary cancel-link">Cancel</a>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <div class="form-group">
+                <label for="classroomID">Classroom ID</label>
+                <input type="text" id="classroomID" name="classroomID" required>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="form-group">
+                <label for="classroomTitle">Classroom Title</label>
+                <input type="text" id="classroomTitle" name="classroomTitle" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" name="startDate" required>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="form-group">
+                <label for="duration">Duration (weeks)</label>
+                <input type="number" id="duration" name="duration" min="1" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="owner">Owner of Classroom</label>
+        <select id="owner" name="owner">
+            <option value="">-- Choose owner of classroom --</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <div class="form-group">
+                <fieldset>
+                    <legend>Select Lesson</legend>
+                    <div id="lessonContainer">
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+        <div class="form-group">
+            <fieldset>
+                <legend>Assign Students</legend>
+                <div id="students-container">
+                    <div class="student-box">
+                        <input type="checkbox" id="student1" value="student1">
+                        <label for="student1">Student 1</label>
+                    </div>
+                    <div class="student-box">
+                        <input type="checkbox" id="student2" value="student2">
+                        <label for="student2">Student 2</label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Create Classroom</button>
+        </div>
+</form>
+
+<center><a href = "../Login page/instructor/instructor.html" class = "button" id = "instructor_pageBtn">Go back to Instructor page</a></center>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="classroom.js"></script>
+</body>
+</html>
