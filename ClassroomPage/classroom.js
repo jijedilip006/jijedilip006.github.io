@@ -240,3 +240,64 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error during page load:", err);
   }
 });
+
+async function handleSave(isDraft) {
+  const classroomID = document.getElementById("classroomID").value;
+  const classroomTitle = document.getElementById("classroomTitle").value;
+  const lessons = Array.from(
+    document.querySelectorAll("#lessonContainer input[type=checkbox]:checked")
+  ).map(cb => cb.value);
+  const startDate = document.getElementById("startDate").value;
+  const duration = parseInt(document.getElementById("duration").value);
+  const students = Array.from(
+    document.querySelectorAll("#students-container input[type=checkbox]:checked")
+  ).map(cb => cb.value);
+  const owner = document.getElementById("owner").value;
+
+  const classroomData = {
+    classroom_id: classroomID,
+    title: classroomTitle,
+    lessons,
+    owner,
+    start_date: startDate,
+    duration,
+    students,
+    "Draft Mode": isDraft   // <-- 🔹 mark draft status
+  };
+
+  let result;
+  if (editId) {
+    // UPDATE
+    result = await supabase
+      .from("classrooms")
+      .update(classroomData)
+      .eq("id", editId);
+  } else {
+    // INSERT
+    result = await supabase
+      .from("classrooms")
+      .insert([classroomData]);
+  }
+
+  const { error } = result;
+  if (error) {
+    alert("Error saving classroom: " + error.message);
+    console.error(error);
+  } else {
+    alert(isDraft ? "Classroom saved as draft!" : "Classroom published!");
+    window.location.href = "../InstructorClassroomPage/classroomPage.html";
+  }
+}
+
+// ----------------------
+// Hook up Save + Publish
+// ----------------------
+document.querySelector(".save-link").addEventListener("click", (e) => {
+  e.preventDefault();
+  handleSave(true);   // Save = draft
+});
+
+document.querySelector("#classroomForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  handleSave(false);  // Publish = create/update
+});

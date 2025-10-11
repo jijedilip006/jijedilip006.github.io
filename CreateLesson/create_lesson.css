@@ -245,3 +245,14 @@ legend {
     font-family: inherit;
     text-align: justify;
 }
+.form-header {
+  display: flex;
+  justify-content: space-between; 
+  margin-bottom: 10px;
+}
+
+.form-header-left, 
+.form-header-right {
+  display: flex;
+  align-items: center;
+}

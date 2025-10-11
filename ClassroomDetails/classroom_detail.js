@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (classroomError) throw classroomError;
 
+    document.getElementById("classroom-title").textContent = classroom.title || "Untitled Classroom";
     document.getElementById("classroom-id").textContent = classroom.classroom_id;
     document.getElementById("classroom-owner").textContent = classroom.owner;
     document.getElementById("classroom-start-date").textContent = classroom.start_date;
@@ -107,6 +108,70 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       lessonsList.appendChild(ul);
     }
+
+    const { data: existingGrades, error: gradesError } = await supabase
+      .from("grades")
+      .select("student_email, grade")
+      .eq("classroom_id", classroomId);
+
+    if (gradesError) throw gradesError;
+
+    const gradeMap = {};
+    existingGrades?.forEach(g => {
+      gradeMap[g.student_email] = g.grade;
+    });
+
+    const tbody = document.querySelector("#grades-table tbody");
+    tbody.innerHTML = "";
+
+    students.forEach(email => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${userMap[email]?.name || email}</td>
+        <td>${email}</td>
+        <td>
+          <select class="grade-select" data-email="${email}">
+            <option value="">--Select--</option>
+            <option value="Pass">Pass</option>
+            <option value="Fail">Fail</option>
+          </select>
+        </td>
+      `;
+      tbody.appendChild(tr);
+
+      // Pre-fill saved grade if exists
+      const select = tr.querySelector(".grade-select");
+      if (gradeMap[email]) {
+        select.value = gradeMap[email];
+      }
+    });
+
+
+    // --- Auto-save on grade change ---
+    document.querySelectorAll(".grade-select").forEach(select => {
+      select.addEventListener("change", async () => {
+        const email = select.dataset.email;
+        const grade = select.value;
+
+        try {
+          const { error } = await supabase
+            .from("grades")
+            .upsert([
+              {
+                classroom_id: classroomId,
+                student_email: email,
+                grade: grade
+              }
+            ]);
+
+          if (error) throw error;
+          console.log(`Grade saved for ${email}: ${grade}`);
+        } catch (err) {
+          console.error("Error saving grade:", err);
+          alert(`Failed to save grade for ${email}`);
+        }
+      });
+    });
 
   } catch (err) {
     console.error("Error loading course details:", err);

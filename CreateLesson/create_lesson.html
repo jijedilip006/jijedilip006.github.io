@@ -10,11 +10,18 @@
     <header>
         Learning Management System
     </header>
+    
     <h1>Create Lesson</h1>
     <form id="lessonForm">
         <div class="form-header">
-            <a href="../InstructorLessonsPage/lesson_page.html" class="cancel-link">cancel</a>
+            <div class="form-header-left">
+                <a href="#" class="cancel-link">Save</a>
+            </div>
+            <div class="form-header-right">
+                <a href="../InstructorLessonsPage/lesson_page.html" class="cancel-link">Cancel</a>
+            </div>
         </div>
+
 
         <div class = "row">
             <div class = "column">
@@ -24,7 +31,7 @@
                 </div>
             
                 <div class = "form-group">
-                    <label for="hours-per-week">Estimated Hours per week</label>
+                    <label for="hours-per-week">Estimated Hours Per week</label>
                     <select id = "hours-per-week" name="Hours" required>
                         <option value="1">1</option>
                         <option value="2">2</option>

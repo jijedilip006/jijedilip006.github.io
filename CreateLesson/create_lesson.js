@@ -69,6 +69,8 @@ readingList.addEventListener("keydown", function(e){
 window.addEventListener("DOMContentLoaded", async () => {
     const prereqContainer = document.getElementById("prerequisite");
     const editLessonId = localStorage.getItem("editLessonId"); // declare first
+    const saveLink = document.querySelector(".form-header-left a"); // "Save" link in header
+    const createBtn = lessonForm.querySelector("button[type='submit']"); // bottom Create Lesson button
 
     try {
         // Fetch all lessons from Supabase
@@ -139,7 +141,6 @@ window.addEventListener("DOMContentLoaded", async () => {
             console.error("Unexpected error loading instructors:", err);
         }
 
-
          // Load the lesson for editing
         if (editLessonId) {
             const { data: lesson, error: fetchError } = await supabase
@@ -177,13 +178,73 @@ window.addEventListener("DOMContentLoaded", async () => {
                 }
                // Change submit button text
         document.querySelector("button[type='submit']").textContent = "Update Lesson";
+        }
     }
-  }
-} catch (err) {
-  console.error("Error loading lessons:", err);
-}
-});
+    } catch (err) {
+    console.error("Error loading lessons:", err);
+    }
 
+    async function handleSave(isDraft) {
+        const prereqContainer = document.getElementById("prerequisite");
+        const selectedPrereqs = [
+            ...prereqContainer.querySelectorAll("input[type='checkbox']:checked")
+        ].map(cb => cb.value);
+
+        const lessonData = {
+            id: document.getElementById("ID").value,
+            title: document.getElementById("Title").value,
+            description: document.getElementById("Description").value,
+            objectives: document.getElementById("objectives").value,
+            prerequisites: selectedPrereqs,
+            hours: document.getElementById("hours-per-week").value,
+            owner: document.getElementById("owner").value,
+            creditPoints: document.getElementById("creditPoints").value,
+            assignments: assignments,
+            readingList: readings,
+            "Draft Mode": isDraft   // 👈 add draft flag here
+        };
+
+        try {
+            const { data: existing } = await supabase
+                .from("lessons")
+                .select("id")
+                .eq("id", lessonData.id)
+                .single();
+
+            if (existing) {
+                const { error } = await supabase
+                    .from("lessons")
+                    .update(lessonData)
+                    .eq("id", lessonData.id);
+                if (error) throw error;
+                alert(isDraft ? "Lesson saved as draft!" : "Lesson updated!");
+            } else {
+                const { error } = await supabase
+                    .from("lessons")
+                    .insert([lessonData]);
+                if (error) throw error;
+                alert(isDraft ? "Lesson saved as draft!" : "Lesson created!");
+            }
+
+            window.location.href = "../InstructorLessonsPage/lesson_page.html";
+        } catch (err) {
+            console.error("Error saving lesson:", err);
+            alert("Failed to save lesson. See console.");
+        }
+    }
+
+    // save link = Draft
+    saveLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleSave(true); // 👈 Draft Mode true
+    });
+
+    // bottom Create button = Publish
+    createBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleSave(false); // 👈 Draft Mode false
+    });
+});
 
 function addReadingItem(text){
     const box = document.createElement("div");
@@ -249,6 +310,7 @@ lessonForm.addEventListener("submit", async function(event){
         console.error("Error saving lesson:", err);
         alert("Failed to save lesson. See console for details.");
     }
+    
 });
 
 function setCursorToEnd(element) {

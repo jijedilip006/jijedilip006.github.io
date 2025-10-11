@@ -1,12 +1,76 @@
 const coursesContainer = document.getElementById("courses-container");
 const noCoursesMsg = document.getElementById("no-courses-msg");
 
+function addUnarchiveButton(div, course) {
+    const unarchiveBtn = document.createElement("button");
+    unarchiveBtn.textContent = "Unarchive";
+    unarchiveBtn.classList.add("unarchive-btn");
+    div.querySelector(".card-content").appendChild(unarchiveBtn);
+
+    unarchiveBtn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (!confirm(`Unarchive course "${course.title}"? This will make it visible again to students.`)) return;
+        try {
+            const { error: unarchiveError } = await supabase
+                .from("courses")
+                .update({ Archived: false })
+                .eq("id", course.id);
+
+            if (unarchiveError) throw unarchiveError;
+
+            alert(`Course "${course.title}" unarchived!`);
+            
+            // Update UI
+            div.querySelector(".archive-badge")?.remove();
+            unarchiveBtn.remove();
+            addArchiveButton(div, course); // swap back to archive button
+        } catch (err) {
+            console.error("Error unarchiving course:", err);
+            alert("Failed to unarchive course. See console for details.");
+        }
+    });
+}
+
+function addArchiveButton(div, course) {
+    const archiveBtn = document.createElement("button");
+    archiveBtn.textContent = "Archive";
+    archiveBtn.classList.add("archive-btn");
+    div.querySelector(".card-content").appendChild(archiveBtn);
+
+    archiveBtn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (!confirm(`Archive course "${course.title}"? This will hide it from students.`)) return;
+        try {
+            const { error: archiveError } = await supabase
+                .from("courses")
+                .update({Archived: true })
+                .eq("id", course.id);
+
+            if (archiveError) throw archiveError;
+
+            alert(`Course "${course.title}" archived!`);
+
+            const archivedBadge = document.createElement("span");
+            archivedBadge.classList.add("archive-badge");
+            archivedBadge.textContent = "Archived";
+            div.querySelector(".card-content").appendChild(archivedBadge);
+
+            archiveBtn.remove();
+            addUnarchiveButton(div, course);
+        } catch (err) {
+            console.error("Error archiving course:", err);
+            alert("Failed to archive course. See console for details.");
+        }
+    });
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
     try {
         // Fetch all courses
         const { data: courses, error } = await supabase
             .from("courses")
-            .select("*");
+            .select("*")
+            .order("Archived", { ascending: true });
         if (error) throw error;
 
         // Clear container
@@ -51,7 +115,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                  `;
             coursesContainer.appendChild(div);
 
-            if (course["Draft Mode"]) {
+            if (course["Draft Mode"] && !course["Archived"]) {
                 const publishBtn = document.createElement("button");
                 publishBtn.textContent = "Publish";
                 publishBtn.classList.add("publish-btn");
@@ -60,22 +124,38 @@ window.addEventListener("DOMContentLoaded", async () => {
                 publishBtn.addEventListener("click", async (e) => {
                     e.stopPropagation();
                     if (confirm(`Publish course "${course.title}"? This will make it visible to students.`)) {
-                    try {
-                        const { error: publishError } = await supabase
-                            .from("courses")
-                            .update({ "Draft Mode": false })
-                            .eq("id", course.id);
-                        if (publishError) throw publishError;
+                        try {
+                            const { error: publishError } = await supabase
+                                .from("courses")
+                                .update({ "Draft Mode": false })
+                                .eq("id", course.id);
+                            if (publishError) throw publishError;
 
-                        alert(`Course "${course.title}" published!`);
-                        publishBtn.remove();
-                        div.querySelector(".draft-badge").remove();
-                    } catch (err) {
-                        console.error("Error publishing course:", err);
-                        alert("Failed to publish course. See console for details.");
+                            alert(`Course "${course.title}" published!`);
+                            publishBtn.remove();
+                            div.querySelector(".draft-badge").remove();
+                            addArchiveButton(div, course);
+                        } catch (err) {
+                            console.error("Error publishing course:", err);
+                            alert("Failed to publish course. See console for details.");
+                        }
                     }
-                }
-            });
+                });
+            }
+
+            // 2. Published (not draft, not archived) → show archive button
+            if (!course["Draft Mode"] && !course["Archived"]) {
+                addArchiveButton(div, course);
+            }
+
+            // 3. Archived → just show badge
+            if (course["Archived"]) {
+                const archivedBadge = document.createElement("span");
+                archivedBadge.classList.add("archive-badge");
+                archivedBadge.textContent = "Archived";
+                div.querySelector(".card-content").appendChild(archivedBadge);
+
+                addUnarchiveButton(div, course);
             }
 
             // === Make whole card clickable (except menu buttons) ===

@@ -92,3 +92,66 @@ h1 {
 .lesson-item:hover {
   text-decoration: underline;
 }
+
+.students-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.students-card th,
+.students-card td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.students-card th {
+  background-color: #09244d;
+  color: white;
+}
+
+.students-card tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.students-card tr:hover {
+  background-color: #f1f1f1;
+}
+
+.grade-select {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none; /* remove default arrow for modern browsers */
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Add a subtle shadow on focus */
+.grade-select:focus {
+  border-color: #09244d;
+  box-shadow: 0 0 5px rgba(9, 36, 77, 0.3);
+  outline: none;
+}
+
+/* Optional: custom arrow for select */
+.grade-select-wrapper {
+  position: relative;
+}
+
+.grade-select-wrapper::after {
+  content: "▼";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #555;
+  font-size: 12px;
+}

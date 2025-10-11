@@ -23,6 +23,7 @@
             </div>
             <hr>
             <button class="dropdown-btn" id="viewProfileBtn">View Profile</button>
+            <button class="dropdown-btn" id="viewStudentBtn">View Students</button>
             <button class="dropdown-btn" id="logoutBtn">Logout</button>
           </div>
         </div>
@@ -52,6 +53,14 @@
         <p>Organize and edit your lessons.</p>
         <a href="../../InstructorLessonsPage/lesson_page.html" class="button">View Lessons</a>
       </div>
+
+      <!-- Report Card -->
+      <div class="dash-card">
+        <h2>Reports</h2>
+        <p>View progress report and summary.</p>
+        <a href="../../InstructorReportPage/report_page.html" class="button">View Reports</a>
+        <a href="../../InstructorSummaryPage/summary_page.html" class="button">View Summary</a>
+      </div>
     </main>
   <center><div id = "course-box1" class = "course-box1">
 
@@ -65,16 +74,7 @@
     const supabase = window.supabase.createClient('https://mavdxyhwlfyzyarukwbr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ');
   </script>
   </div>
-  </center>
 
-  <center>
-  <div id="student-list-box" class="student-list-box">
-    <h2>All Students</h2>
-    <ul id="student-list"></ul>
-  </div>
-</center>
-
-  
   <script src = "instructor.js"></script>
 
 </body>

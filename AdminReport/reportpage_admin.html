@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Report Page</title>
+    <link rel="stylesheet" href="reportpage_admin.css">
+</head>
+
+<body class="admin-report">
+    <header>
+        Learning Management System
+    </header>
+
+    <h1>Admin Report Dashboard</h1>
+
+    <main class="report-card">
+
+    <!-- Courses Overview -->
+    <div class="report-section">
+        <h2>Courses Overview</h2>
+        <p>Total Courses: <span></span></p>
+        <p>Active Courses: <span></span></p>
+        <p>Archived Courses: <span></span></p>
+        <p>Average Lessons per Course: <span></span></p>
+        <p>Average Credit per Lesson: <span></span></p>
+    </div>
+
+    <!-- Classrooms Overview -->
+    <div class="report-section">
+        <h2>Classrooms Overview</h2>
+        <p>Total Classrooms: <span></span></p>
+        <p>Active Classrooms: <span></span></p>
+        <p>Completed Classrooms: <span></span></p>
+        <p>Average Students per Classroom: <span></span></p>
+    </div>
+
+    <!-- User Statistics -->
+    <div class="report-section">
+        <h2>User Statistics</h2>
+        <p>Total Users: <span></span></p>
+        <p>Number of Instructors: <span></span></p>
+        <p>Number of Students: <span></span></p>
+    </div>
+
+</main>
+
+    <div class="center-button">
+        <a href="../Login page/admin/admin.html" class="button" id="admin_pageBtn">Go back to Admin Page</a>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="reportpage_admin.js"></script>
+</body>
+</html>

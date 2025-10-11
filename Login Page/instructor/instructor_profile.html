@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instructor Profile</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="instructor_profile.css">
+</head>
+
+<body class="instructor-dashboard">
+  <header>
+    <div class="header-left">
+      Learning Management System
+    </div>
+  </header>
+
+  <h1>Instructor Profile</h1>
+
+  <main class="dashboard-cards">
+
+    <div class="dash-card profile-card">
+      <h2>Instructor</h2>
+      <p><strong>Name:</strong> <span id="instructor-name"></span></p>
+      <p><strong>Email ID:</strong> <span id="instructor-email"></span></p>
+    </div>
+
+    <div class="dash-card">
+      <h2>Total Active Classrooms</h2>
+      <p id="active-classrooms"></p>
+    </div>
+
+    <div class="dash-card">
+      <h2>Total Courses Teaching</h2>
+      <p id="total-courses"></p>
+    </div>
+
+    <div class="dash-card">
+      <h2>Courses Details </h2>
+      <div id="course-list"></div>
+
+    </div>
+  </main>
+  <a href="instructor.html" class="button back-btn">Back</a>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";
+    const supabase = window.supabase.createClient('https://mavdxyhwlfyzyarukwbr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ');
+  </script>
+  <script src="instructor_profile.js"></script>
+
+</body>
+</html>

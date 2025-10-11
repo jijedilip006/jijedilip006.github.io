@@ -1,0 +1,29 @@
+/* force left alignment */
+#course-list {
+    text-align: left;
+  }
+
+/* remove the extra margins browsers add */
+#course-list details {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* align summary text consistently */
+  #course-list summary {
+    list-style: none; /* removes the arrow bullet if you want */
+    margin: 0;
+    padding: 2px 0;
+    cursor: pointer;
+  }
+  
+  /* make the lessons indent consistently */
+  #course-list ul {
+    margin: 0.25rem 0 0.75rem 1.5rem; /* top/right/bottom/left */
+    padding: 0;
+  }
+  
+  #course-list li {
+    margin: 0.2rem 0;
+  }
+  

@@ -191,3 +191,14 @@ legend {
 .button:hover{
     background-color: #0056b3;
 }
+.form-header {
+  display: flex;
+  justify-content: space-between;  
+  margin-bottom: 10px;
+}
+
+.form-header-left, 
+.form-header-right {
+  display: flex;
+  align-items: center;
+}

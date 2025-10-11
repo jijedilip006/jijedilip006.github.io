@@ -6,7 +6,7 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const courseTitleEl = document.getElementById("course-title");
 const lessonsContainer = document.getElementById("lessons-container");
 
-// Get courseId 
+// Get courseId from URL
 const params = new URLSearchParams(window.location.search);
 const courseId = params.get("courseId");
 
@@ -15,12 +15,10 @@ if (!courseId) {
   lessonsContainer.textContent = "Missing courseId in URL.";
 } else {
   loadLessons();
-
-
 }
 
 async function loadLessons() {
-  //  get lesson_ids
+  // Fetch the course info
   const { data: course, error: courseError } = await supabase
     .from("courses")
     .select("id, lesson_ids")
@@ -29,24 +27,22 @@ async function loadLessons() {
 
   if (courseError || !course) {
     courseTitleEl.textContent = "Error loading course";
-    lessonsContainer.textContent =
-      courseError?.message || "No course found.";
+    lessonsContainer.textContent = courseError?.message || "No course found.";
     return;
   }
 
   courseTitleEl.textContent = `Lessons for Course: ${course.id}`;
 
-  // lesson rows
   const lessonIds = course.lesson_ids || [];
   if (lessonIds.length === 0) {
     lessonsContainer.textContent = "No lessons found for this course.";
     return;
   }
 
-  const { data: lessons, error: lessonsError } = await supabase
-  .from("lessons")
-  .select("id, title, description, completed_by, prerequisites")  
-  .in("id", lessonIds);
+  let { data: lessons, error: lessonsError } = await supabase
+    .from("lessons")
+    .select("id, title, description, completed_by, prerequisites, Archived")
+    .in("id", lessonIds);
 
   if (lessonsError) {
     lessonsContainer.textContent = "Error loading lessons.";
@@ -54,89 +50,138 @@ async function loadLessons() {
     return;
   }
 
-const user = JSON.parse(localStorage.getItem("loggedInUser"));
-const studentEmail = user?.email;
-const norm = (s) => (typeof s === "string" ? s.trim().toLowerCase() : "");
+  lessons = lessons.filter(l => !l.Archived);
 
-lessons.forEach((lesson) => {
-  const completedList = Array.isArray(lesson.completed_by) ? lesson.completed_by : [];
-  const isDone = studentEmail && completedList.map(norm).includes(norm(studentEmail));
+  // lesson sort
+  lessons = sortLessonsByDependencies(lessons);
 
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  const studentEmail = user?.email;
+  const norm = (s) => (typeof s === "string" ? s.trim().toLowerCase() : "");
 
-const prereqs = Array.isArray(lesson.prerequisites) ? lesson.prerequisites : [];
-const canAccess = prereqs.every(preId => {
-  const preLesson = lessons.find(l => l.id === preId);
-  if (!preLesson) return false; 
-  const preCompleted = Array.isArray(preLesson.completed_by) ? preLesson.completed_by : [];
-  return studentEmail && preCompleted.map(norm).includes(norm(studentEmail));
-});
+  lessonsContainer.innerHTML = "";
 
-lessonsContainer.innerHTML += `
-  <div class="lesson-card" data-lesson-id="${lesson.id}">
-    <a href="${canAccess ? `individual_lessons.html?lessonId=${lesson.id}` : '#'}"
-       class="lesson-link ${canAccess ? '' : 'locked'}"
-       style="flex:1; text-decoration:none; color:inherit; display:flex; align-items:center; justify-content:space-between;">
-      <div>
-        <h3>${lesson.title}</h3>
-        <p>${lesson.description || "No description"}</p>
+  lessons.forEach((lesson) => {
+    const completedList = Array.isArray(lesson.completed_by) ? lesson.completed_by : [];
+    const isDone = studentEmail && completedList.map(norm).includes(norm(studentEmail));
+
+    const prereqs = Array.isArray(lesson.prerequisites) ? lesson.prerequisites : [];
+    const canAccess = prereqs.every(preId => {
+      const preLesson = lessons.find(l => l.id === preId);
+      if (!preLesson) return false;
+      const preCompleted = Array.isArray(preLesson.completed_by) ? preLesson.completed_by : [];
+      return studentEmail && preCompleted.map(norm).includes(norm(studentEmail));
+    });
+
+    lessonsContainer.innerHTML += `
+      <div class="lesson-card" data-lesson-id="${lesson.id}">
+        <a href="${canAccess ? `individual_lessons.html?lessonId=${lesson.id}` : '#'}"
+          class="lesson-link ${canAccess ? '' : 'locked'}"
+          style="flex:1; text-decoration:none; color:inherit; display:flex; align-items:center; justify-content:space-between;">
+          <div>
+            <h3>${lesson.title}</h3>
+            <p>${lesson.description || "No description"}</p>
+          </div>
+          ${!canAccess ? `<span class="lock-icon">🔒</span>` : ""}
+        </a>
+        <div class="done-box">
+          <input type="checkbox" id="done-${lesson.id}" 
+                ${isDone ? "checked" : ""} 
+                ${canAccess ? "" : "disabled"}>
+          <label for="done-${lesson.id}">${isDone ? "Done" : "Mark as done"}</label>
+        </div>
       </div>
-      ${!canAccess ? `<span class="lock-icon">🔒</span>` : ''}
-    </a>
-    <div class="done-box">
-<input type="checkbox" id="done-${lesson.id}" 
-       ${isDone ? "checked" : ""} 
-       ${canAccess ? "" : "disabled"}>      <label for="done-${lesson.id}">${isDone ? "Done" : "Mark as done"}</label>
-    </div>
-  </div>
-`;
-});
+    `;
+  });
 
+  lessonsContainer.addEventListener("change", async (e) => {
+    if (!e.target.matches('input[type="checkbox"]')) return;
 
-lessonsContainer.addEventListener("change", async (e) => {
-  if (!e.target.matches('input[type="checkbox"]')) return;
+    const checkbox = e.target;
+    const lessonCard = checkbox.closest(".lesson-card");
+    const lessonId = lessonCard.dataset.lessonId;
+    const label = checkbox.nextElementSibling;
+    const checked = checkbox.checked;
 
-  const checkbox = e.target;
-  const lessonCard = checkbox.closest(".lesson-card");
-  const lessonId = lessonCard.dataset.lessonId;
-  const label = checkbox.nextElementSibling;
-  const checked = checkbox.checked;
+    checkbox.disabled = true;
+
+    try {
+      const { data: lessonRow, error } = await supabase
+        .from("lessons")
+        .select("completed_by")
+        .eq("id", lessonId)
+        .single();
+
+      if (error) throw error;
+
+      const current = Array.isArray(lessonRow.completed_by) ? lessonRow.completed_by : [];
+      let updated;
+      if (checked) {
+        updated = current.includes(studentEmail) ? current : [...current, studentEmail];
+      } else {
+        updated = current.filter((e) => e !== studentEmail);
+      }
+
+      const { error: updateErr } = await supabase
+        .from("lessons")
+        .update({ completed_by: updated })
+        .eq("id", lessonId);
+
+      if (updateErr) throw updateErr;
+
+      label.textContent = checked ? "Done" : "Mark as done";
+      window.location.reload();
+    } catch (err) {
+      console.error("Error updating completed_by:", err);
+      checkbox.checked = !checked;
+      alert("Could not update completion. Check console.");
+    } finally {
+      checkbox.disabled = false;
+    }
+  });
+}
+
+// Sort lessons by prerequisites but by order
+function sortLessonsByDependencies(lessons) {
+  const lessonMap = new Map(lessons.map(l => [l.id, l]));
+  const dependents = new Map();
 
   
-  checkbox.disabled = true;
+  lessons.forEach(l => {
+    const prereqs = Array.isArray(l.prerequisites) ? l.prerequisites : [];
+    prereqs.forEach(preId => {
+      if (!dependents.has(preId)) dependents.set(preId, []);
+      dependents.get(preId).push(l.id);
+    });
+  });
 
-  try {
-    const { data: lessonRow, error } = await supabase
-      .from("lessons")
-      .select("completed_by")
-      .eq("id", lessonId)
-      .single();
+  const visited = new Set();
+  const sorted = [];
 
-    if (error) throw error;
+  function visit(lesson) {
+    if (visited.has(lesson.id)) return;
+    visited.add(lesson.id);
 
-    const current = Array.isArray(lessonRow.completed_by) ? lessonRow.completed_by : [];
-    let updated;
-    if (checked) {
-      updated = current.includes(studentEmail) ? current : [...current, studentEmail];
-    } else {
-      updated = current.filter((e) => e !== studentEmail);
-    }
+    const prereqs = Array.isArray(lesson.prerequisites) ? lesson.prerequisites : [];
+    prereqs.forEach(preId => {
+      const preLesson = lessonMap.get(preId);
+      if (preLesson) visit(preLesson);
+    });
 
-    const { error: updateErr } = await supabase
-      .from("lessons")
-      .update({ completed_by: updated })
-      .eq("id", lessonId);
-
-    if (updateErr) throw updateErr;
-
-    label.textContent = checked ? "Done" : "Mark as done";
-    window.location.reload();
-
-  } catch (err) {
-    console.error("Error updating completed_by:", err);
-    checkbox.checked = !checked;
-    alert("Could not update completion. Check console.");
-  } finally {
-    checkbox.disabled = false;
+    sorted.push(lesson);
   }
-});
+
+  // no prereqs + not a prereq
+  const independentLessons = lessons.filter(l => {
+    const prereqs = Array.isArray(l.prerequisites) ? l.prerequisites : [];
+    const isPrereqForOthers = dependents.has(l.id);
+    return prereqs.length === 0 && !isPrereqForOthers;
+  });
+
+  // Return the lone lessons first
+  independentLessons.forEach(visit);
+  
+  lessons.forEach(visit);
+
+  return sorted;
 }

@@ -15,8 +15,9 @@ const listEl = document.getElementById("course-list");
 async function loadCourses() {
   const { data: courses, error } = await supabase
     .from("courses")
-    .select("id, owner, lesson_ids, Students_Enrolled, description,Instructor,title")
-    .eq("Draft Mode", false);
+    .select("id, owner, lesson_ids, Students_Enrolled, description,title")
+    .eq("Draft Mode", false)
+    .eq("Archived", false);   
 
   if (error) {
     console.error(error);

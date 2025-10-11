@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+
+}
+
+header {
+  background-color: #09244d; 
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+    
+h1 {
+  margin: 0;
+  color: white;
+  padding: 30px;
+  text-align: center;
+  background-color: #09244d;
+  font-weight: bold;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, 
+table td {
+  padding: 12px;
+  border: 1px solid #ddd; /* optional for clearer separation */
+}
+
+table th {
+  text-align: center;
+  width: 33.33%;   /* equal width for 3 headers */
+  background: #09244d;
+  font-weight: 600;
+  color: white;
+}
+
+table td {
+  text-align: left; /* student details stay left */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+.center-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    margin: 6px;
+    text-align: center;
+}
+
+.button:hover{
+    background-color: #0056b3;
+}

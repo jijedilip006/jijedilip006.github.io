@@ -145,3 +145,93 @@ h1 {
     background: none;
     cursor: pointer;
 }
+
+.draft-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  background: linear-gradient(135deg, #fff453, #cfc400); /* subtle gradient */
+  color: #555555;             /* darker gray for readability */
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  padding: 4px 10px;
+  border-radius: 999px;    /* pill shape */
+  box-shadow: 0 2px 4px rgba(217, 211, 155, 0.1); /* soft shadow */
+  letter-spacing: 0.5px;   /* subtle spacing for cleaner look */
+}
+
+.publish-btn {
+    display: block;
+    width: 60%; /* Adjust width for consistency */
+    padding: 10px;
+    background-color: #51a309; /* Dark blue color */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 20px auto 10px;
+}
+
+/* Optional: Add hover effect for better user experience */
+.publish-btn:hover {
+    background-color: #326604; /* A slightly darker blue on hover */
+}
+
+.archive-btn {
+  display: block;
+    width: 60%; /* Adjust width for consistency */
+    padding: 10px;
+    background-color: #999999; /* Dark blue color */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 20px auto 10px;
+}
+
+.archive-btn:hover {
+  background-color: #7a7a7a;
+}
+
+.archive-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  background: linear-gradient(135deg, #cccccc, #888888);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  letter-spacing: 0.5px;
+}
+
+/* UNARCHIVE button */
+.unarchive-btn {
+  display: block;
+  width: 60%;
+  padding: 10px;
+  background-color: #e68900; /* orange tone to differentiate */
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px auto 10px;
+}
+
+.unarchive-btn:hover {
+  background-color: #b87002;
+}

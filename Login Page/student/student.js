@@ -19,6 +19,11 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("loggedInUser");
 });
 
+// View Profile
+document.getElementById("viewProfileBtn").addEventListener("click", () => {
+  window.location.href = "student_profile.html";
+});
+
 // Dropdown toggle
 const userBtn = document.querySelector(".user-btn")
 const dropdown = document.querySelector(".dropdown-content")
@@ -34,15 +39,10 @@ window.addEventListener("click", (e) => {
   }
 });
 
-// View Profile
-document.getElementById("viewProfileBtn").addEventListener("click", () => {
-  alert("Profile page not yet created!");
-});
-
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("loggedInUser");
-  window.location.href = "../login.html";
+  window.location.href = "/index.html";
 });
 
 async function unenroll(courseId,userEmail) {
@@ -83,7 +83,7 @@ async function unenroll(courseId,userEmail) {
 
   const { data, error } = await supabase
     .from("courses")
-    .select("id, owner, lesson_ids, Students_Enrolled, description,Instructor,title")
+    .select("id, owner, lesson_ids, Students_Enrolled, description,title")
     .contains("Students_Enrolled", JSON.stringify([user.email]));
 
   if (error) {
