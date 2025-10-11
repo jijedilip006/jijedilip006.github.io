@@ -11,13 +11,9 @@ if (user && user.role === "instructor") {
   document.getElementById("user-fullname").textContent =
     `${user.firstName} ${user.lastName}`;
 } else {
-  window.location.href = "index.html";
+  window.location.href = "login.html";
 }
 
-//remove user
-document.getElementById("logoutBtn").addEventListener("click", () => {
-  localStorage.removeItem("loggedInUser");
-});
 
 // Dropdown toggle
 const userBtn = document.querySelector(".user-btn");
@@ -36,13 +32,19 @@ window.addEventListener("click", (e) => {
 
 // View Profile
 document.getElementById("viewProfileBtn").addEventListener("click", () => {
-  alert("Profile page not yet created!");
+  window.location.href = "instructor_profile.html";
 });
+
+// View Student
+document.getElementById("viewStudentBtn").addEventListener("click", () => {
+  window.location.href = "../../InstructorStudentsPage/student_page.html";
+});
+
 
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("loggedInUser");
-  window.location.href = "../index.html";
+  window.location.href = "/index.html";
 });
 
 
@@ -79,27 +81,3 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   }
 })();
 
-async function loadStudents() {
-  //fetch students 
-  const { data: students, error } = await supabase
-  .from('users')
-  .select('firstName,lastName,email')
-  .eq('role', 'student')
-  .order('firstName', { ascending: true });
-
-  if (error) {
-    console.error("Error fetching students:", error);
-    return;
-  }
-
-  const listEl = document.getElementById('student-list');
-  listEl.innerHTML = ''; 
-
-  students.forEach(student => {
-    const li = document.createElement('li');
-    li.textContent = `${student.firstName} ${student.lastName} (${student.email})`;
-    listEl.appendChild(li);
-  });
-}
-
-loadStudents();

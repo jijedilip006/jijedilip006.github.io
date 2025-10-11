@@ -3,7 +3,7 @@
 <head>
     <meta charset = "UTF-8">
     <title>Learning Management System</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel = "stylesheet" href = "Login page\styles.css">
 </head>
 
 <body class = login-page>
@@ -25,15 +25,21 @@
 
         <button type = "submit">Log in</button>
     
-        <p class = "register-link">
-            Don't have an account?
-            <a href="../Registration_page/registration.html">Register Now</a>
-        </p>
+        <div class="login-links">
+            <p class="register-link">
+                Don't have an account?
+                <a href="../Registration_page/registration.html">Register Now</a>
+            </p>
+
+            <p class="forgot-password">
+                <a href="../ForgotPasswordPage/forgot_password.html">Forgot Password?</a>
+            </p>
+        </div>
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
 
     <!-- Then your login.js -->
-    <script src="login.js?v=1"></script>
+    <script src="Login page/login.js?v=1"></script>
 </body>
 </html>

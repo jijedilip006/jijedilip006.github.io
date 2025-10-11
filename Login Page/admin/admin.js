@@ -35,11 +35,11 @@ window.addEventListener("click", (e) => {
 
 // View Profile
 document.getElementById("viewProfileBtn").addEventListener("click", () => {
-  alert("Profile page not yet created!");
+  window.location.href = "admin_profile.html";
 });
 
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("loggedInUser");
-  window.location.href = "../login.html";
+  window.location.href = "/index.html";
 });
