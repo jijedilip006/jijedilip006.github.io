@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Classroom Management</title>
+  <link rel="stylesheet" href="../InstructorClassroomPage/classroomPage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    Learning Management System (Admin)
+    <div class="theme-toggle">
+      <i class="fa-solid fa-sun"></i>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+      <i class="fa-solid fa-moon"></i>
+    </div>
+  </header>
+
+  <h1>Classroom Management</h1>
+
+  <main class="content">
+    <div class="button-container">
+      <!--  Admin’s Create Classroom page -->
+      <a href="../AdminCreateClass/admin_classroom.html" class="button" id="createClassroomBtn">
+        Create Classroom
+      </a>
+    </div>
+
+    <div id="classroom-container"></div>
+
+    <p id="no-classroom-msg" style="text-align:center; margin:5px 0;">
+      No classrooms found. Click Create Classroom to add one.
+    </p>
+
+    <div class="center-button">
+      <a href="../Login page/admin/admin.html" class="button">Go back to Admin Dashboard</a>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
+  <script>
+    const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";
+    const SUPABASE_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  </script>
+
+  <script src="admin_classroom_page.js"></script>
+</body>
+</html>

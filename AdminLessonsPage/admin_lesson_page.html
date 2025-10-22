@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<head> 
+    <meta charset="UTF-8">
+    <title> Lessons </title>
+    <link rel = "stylesheet" href = "admin_lesson_page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <header>
+        Learning Management System
+        <h1>Lessons Page</h1>
+         <div class="theme-toggle">
+        <i class="fa-solid fa-sun"></i>
+        <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+        </label>
+        <i class="fa-solid fa-moon"></i>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </header>
+
+    <main class="content">
+        <div class="button-container">
+            <button id = "createLessonBtn">Create Lesson</button>
+        </div>
+
+        <div id="lessons-container">
+            <p>No lessons yet. Click below to create one.</p>
+        </div>
+
+        <div class="center-button">
+            <a href = "../Login page/admin/admin.html" class = "button" id = "admin_pageBtn">Go back to Admin page</a>
+        </div>
+    </main>
+
+    <!-- Supabase client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
+    <script>
+    const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";   // replace
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";              // replace
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    </script>
+
+<script src="admin_lesson_page.js"></script>
+</body>
+</html>

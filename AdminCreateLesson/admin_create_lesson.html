@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<head> 
+    <meta charset="UTF-8">
+    <title> Create Lesson </title>
+    <link rel = "stylesheet" href = "admin_create_lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <header>
+        Learning Management System
+         <div class="theme-toggle">
+        <i class="fa-solid fa-sun"></i>
+        <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+        </label>
+        <i class="fa-solid fa-moon"></i>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </header>
+    
+    <h1>Create Lesson</h1>
+    <form id="lessonForm">
+        <div class="form-header">
+            <div class="form-header-left">
+                <a href="#" class="cancel-link">Save</a>
+            </div>
+            <div class="form-header-right">
+                <a href="../AdminLessonsPage/admin_lesson_page.html" class="cancel-link">Cancel</a>
+            </div>
+        </div>
+
+
+        <div class = "row">
+            <div class = "column">
+                <div class = "form-group">
+                    <label for="ID">Lesson ID</label>
+                    <input type="text" id="ID" name="ID" required>
+                </div>
+            
+                <div class = "form-group">
+                    <label for="hours-per-week">Estimated Hours Per week</label>
+                    <select id = "hours-per-week" name="Hours" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class = "column">
+                <div class = "form-group">
+                    <label for="title">Lesson Title</label>
+                    <input type = "text" id = "Title" name = "Title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="creditPoints">Credit Points</label>
+                    <select id="creditPoints" name="creditPoints" required>
+                        <option value = "1">1cp</option>
+                        <option value = "2">2cp</option>
+                        <option value = "3">3cp</option>
+                        <option value = "4">4cp</option>
+                        <option value = "5">5cp</option>
+                        <option value = "6">6cp</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class = "form-group">
+            <label for="description">Lesson Description</label>
+            <textarea id = "Description" name = "Description"rows = "5" required></textarea>
+        </div>
+
+        <div class = "form-group">
+            <label for="objective">Lesson Objectives</label>
+            <textarea id = "objectives" name = "Objectives" rows = "5" required></textarea>
+        </div>
+
+        <div class = "form-group">
+            <fieldset>
+            <legend>Prerequisites</legend>
+            <div id="prerequisite"></div>
+            </fieldset>
+        </div>
+
+        <div class = "column">
+            <div class="form-group">
+                <label for="owner">Owner of Lesson</label>
+                <select id="owner" name="owner" required>
+                  <!-- Will be filled dynamically -->
+                </select>
+              </div>
+        </div>
+
+        <div class="form-group">
+            <label for="ReadingList">Reading List</label>
+            <div contenteditable="true" class="tag-input" id="ReadingList"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="Assignments">Assignments</label>
+            <div contenteditable="true" class="tag-input" id="Assignments"></div>
+        </div>
+
+        <button type="submit">Create Lesson</button>
+
+        
+    </form>
+    <center><a href = "../Login page/instructor/instructor.html" class = "button" id = "instructor_pageBtn">Go back to Instructor page</a></center>
+
+    <!-- Supabase client -->
+     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
+     <script>
+     const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";   // replace
+     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";              // replace
+     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+     </script>
+     
+     <script src="admin_create_lesson.js"></script>
+</body>
+</html>

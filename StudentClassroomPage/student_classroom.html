@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Classroom</title>
+    <link rel="stylesheet" href="student_classroom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        Learning Management System
+        <div class="theme-toggle">
+            <i class="fa-solid fa-sun"></i>
+            <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+            </label>
+            <i class="fa-solid fa-moon"></i>
+        </div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </header>
+
+    <h1>Classroom Page</h1>
+
+    <form id="studentClassroomForm">
+        <h2>Choose Your Classroom</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Classroom ID</th>
+                    <th>Classroom Title</th>
+                    <th>Classroom Owner</th>
+                    <th>Courses</th>
+                    <th>Lessons</th>
+                    <th>Allocate</th>
+                </tr>
+            </thead>
+            <tbody id="classroom-list">
+            </tbody>
+        </table>
+
+        <div id="message" class="message"></div>
+    </form>
+
+    <div class="center-button">
+        <a href = "../Login page/student/student.html" class = "button" id = "studentPageBtn">Go back to Student page</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
+    <script>
+    const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";   // replace
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";              // replace
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    </script>
+
+    <script src="student_classroom.js"></script>
+</body>
+</html>
