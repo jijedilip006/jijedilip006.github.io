@@ -13,22 +13,59 @@
     <div class = "header-right">
         <div class = "user-menu">
           <button class = "user-btn">Admin ▾</button>
-          
           <div class = "dropdown-content">
             <div class="user-info">
               <strong id="user-fullname">Admin Name</strong><br>
-              <small>Student</small>
+              <small>Admin</small>
             </div>
             <hr>
             <button class="dropdown-btn" id="viewProfileBtn">View Profile</button>
             <button class="dropdown-btn" id="logoutBtn">Logout</button>
           </div>
         </div>
+              <div class="theme-toggle">
+        <i class="fa-solid fa-sun"></i>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+        <i class="fa-solid fa-moon"></i>
       </div>
-    </header>
-    <h1>Admin Dashboard</h1>
-
+    </div>
+  </header>
+  <h1>Admin Dashboard</h1>
   <p id = "welcome-message"></p>
+    <!-- 🔹 Dashboard Cards Section -->
+  <main class="dashboard-cards">
+
+    <!-- Classrooms Card -->
+  <div class="dash-card">
+    <h2>Classrooms</h2>
+    <p>View and manage all classrooms in the system.</p>
+    <a href="../../AdminClassroomPage/admin_classroom_page.html" class="button">View Classrooms</a>
+  </div>
+
+  <!-- Courses Card -->
+  <div class="dash-card">
+    <h2>Courses</h2>
+    <p>View and manage all your courses.</p>
+    <a href="../../AdminCoursesPage/admin_course_page.html" class="button">View Courses</a>
+  </div>
+
+  <!-- Lessons Card -->
+  <div class="dash-card">
+    <h2>Lessons</h2>
+    <p>Organize and edit your lessons.</p>
+    <a href="../../AdminLessonsPage/admin_lesson_page.html" class="button">View Lessons</a>
+  </div>
+
+    <!-- Reports Card -->
+    <div class="dash-card">
+      <h2>Reports</h2>
+      <p>View and manage all user activity reports.</p>
+      <a href="../../AdminReport/reportpage_admin.html" class="button">View Reports</a>
+    </div>
+  </main>
   <script src = "admin.js"></script>
 </body>
 </html>

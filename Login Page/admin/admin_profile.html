@@ -9,9 +9,18 @@
 <body class="admin-dashboard">
   <header>
     Learning Management System
+         <div class="theme-toggle">
+            <i class="fa-solid fa-sun"></i>
+            <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+            </label>
+            <i class="fa-solid fa-moon"></i>
+        </div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   </header>
 
-  <h1>Profile</h1>
+  <h1>Admin Profile</h1>
 
   <div class="card profile-card">
     <div class="profile-info">
@@ -21,35 +30,41 @@
     </div>
   </div>
 
-  <div class="card enquiries-card">
-    <h2>Total Enquiries</h2>
-  </div>
-
-  <div class="card classrooms-card">
-    <h2>Active Classrooms</h2>
-    <table>
+    <!-- Registration Details Table -->
+  <div class="card registrations-card">
+    <h2>Students</h2>
+    <table id="studentsTable">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Title</th>
-          <th>Owner</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Remove</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Filled dynamically -->
+        <!-- Dynamic rows will be inserted here via admin_profile.js -->
       </tbody>
     </table>
   </div>
 
-  <div class="card instructors-card">
+    <!-- Instructors Table -->
+  <div class="card registrations-card">
     <h2>Instructors</h2>
-    <table>
+    <table id="instructorsTable">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Title</th>
+          <th>First Name</th>
+          <th>Last Name</th>
           <th>Email</th>
+          <th>Remove</th>
         </tr>
       </thead>
+      <tbody>
+
+      </tbody>
     </table>
   </div>
 
