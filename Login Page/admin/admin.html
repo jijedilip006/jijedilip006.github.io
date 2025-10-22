@@ -3,39 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin Dashboard</title>
-  <link rel = "stylesheet" href = "../styles.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body class="admin-dashboard">
-    <header>
-        Learning Management System
+  <header>
+    <div class="header-left">
+      Learning Management System
+    </div>
 
-    <div class = "header-right">
-        <div class = "user-menu">
-          <button class = "user-btn">Admin ▾</button>
-          <div class = "dropdown-content">
-            <div class="user-info">
-              <strong id="user-fullname">Admin Name</strong><br>
-              <small>Admin</small>
-            </div>
-            <hr>
-            <button class="dropdown-btn" id="viewProfileBtn">View Profile</button>
-            <button class="dropdown-btn" id="logoutBtn">Logout</button>
+    <div class="header-right">
+      <div class="user-menu">
+        <button class="user-btn">Admin ▾</button>
+        <div class="dropdown-content">
+          <div class="user-info">
+            <strong id="user-fullname">Admin Name</strong><br>
+            <small>Admin</small>
           </div>
+          <hr>
+          <button class="dropdown-btn" id="viewProfileBtn">View Profile</button>
+          <button class="dropdown-btn" id="logoutBtn">Logout</button>
         </div>
-        <div class="theme-toggle">
-          <i class="fa-solid fa-sun"></i>
-          <label class="switch">
-            <input type="checkbox">
-            <span class="slider"></span>
-          </label>
-          <i class="fa-solid fa-moon"></i>
+      </div>
+
+      <div class="theme-toggle">
+        <i class="fa-solid fa-sun"></i>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+        <i class="fa-solid fa-moon"></i>
       </div>
     </div>
   </header>
+
   <h1>Admin Dashboard</h1>
-  <p id = "welcome-message"></p>
-    <!-- 🔹 Dashboard Cards Section -->
+  <p id="welcome-message"></p>
+  
+
+  <!-- 🔹 Dashboard Cards Section -->
   <main class="dashboard-cards">
 
     <!-- Classrooms Card -->
@@ -66,6 +73,7 @@
       <a href="../../AdminReport/reportpage_admin.html" class="button">View Reports</a>
     </div>
   </main>
-  <script src = "admin.js"></script>
+
+  <script src="admin.js"></script>
 </body>
 </html>
