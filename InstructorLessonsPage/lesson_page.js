@@ -1,6 +1,29 @@
 const createLessonButton = document.getElementById("createLessonBtn");
 const lessonsContainer = document.getElementById("lessons-container");
 
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
 async function fetchLessons() {
     const { data, error } = await supabase.from("lessons").select("*");
     if (error) {
@@ -93,7 +116,7 @@ async function displayLessons(){
                 </div>
                 <div class="lesson-header">
                     ${draftStatus}
-                    <span class="lesson-id-title">${lesson.id} - ${lesson.title}</span>
+                    <span class="lesson-id-title">${lesson.id}</span>
                 </div>
                 <p><strong>Credit Points:</strong> ${lesson.creditPoints}</p>
                 <p><strong>Owner:</strong> ${lesson.owner}</p>

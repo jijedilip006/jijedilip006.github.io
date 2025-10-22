@@ -1,6 +1,29 @@
 const createClassroomButton = document.getElementById("createClassroomBtn");
 const classroomsContainer = document.getElementById("classroom-container");
 
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
 // Fetch all classrooms
 async function fetchClassrooms() {
   const { data, error } = await supabase.from("classrooms").select("*").order("Archived", { ascending: true });
@@ -54,6 +77,30 @@ function addUnarchiveButton(div, classroom) {
         e.stopPropagation();
         if (!confirm(`Unarchive classroom "${classroom.title}"?`)) return;
         try {
+                // Step 1: Fetch students for this classroom
+          const students = Array.isArray(classroom.students) ? classroom.students : [];
+
+          if (students.length > 0) {
+            // Step 2: Check for conflicts
+            const { data: conflicts, error: checkError } = await supabase
+              .from("classrooms")
+              .select("classroom_id, students, title")
+              .contains("students", JSON.stringify(students))
+              .eq("Archived", false)
+              .eq("Draft Mode", false)
+              .neq("id", classroom.id);
+
+            if (checkError) throw checkError;
+
+            if (conflicts && conflicts.length > 0) {
+              alert(
+                `Cannot unarchive. Some students are already enrolled in active classrooms:\n${conflicts
+                  .map((c) => `- ${c.title} (${c.classroom_id})`)
+                  .join("\n")}\n\nPlease remove or change these students first.`
+              );
+              return; // 🚫 stop
+            }
+          }
             const { error } = await supabase
                 .from("classrooms")
                 .update({ Archived: false })
@@ -123,6 +170,31 @@ async function displayClassrooms() {
           e.stopPropagation();
           if (!confirm(`Publish classroom "${classroom.title}"?`)) return;
           try {
+            // Step 1: Fetch students for this classroom
+            const students = Array.isArray(classroom.students) ? classroom.students : [];
+
+            if (students.length > 0) {
+              // Step 2: Check for overlapping enrollment
+              const { data: conflicts, error: checkError } = await supabase
+              .from("classrooms")
+              .select("classroom_id, students, title")
+              .contains("students", JSON.stringify(students))
+              .eq("Archived", false)
+              .eq("Draft Mode", false)
+              .neq("id", classroom.id); // exclude current classroom
+              if (checkError) throw checkError;
+
+              // Step 3: If any overlaps found, stop publishing
+              if (conflicts && conflicts.length > 0) {
+                alert(
+                  `Cannot publish. Some students are already assigned to active classrooms:\n${conflicts
+                    .map((c) => `- ${c.title} (${c.classroom_id})`)
+                    .join("\n")}\n\nPlease modify the student list first.`
+                );
+                return; //  stop
+              }
+            }
+
             const { error } = await supabase
               .from("classrooms")
               .update({ "Draft Mode": false })

@@ -12,6 +12,52 @@ const confirmMsg = document.getElementById('confirmMessage');
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordPattern = /^[A-Z](?=.*[!@#$%^&*(),.?":{}|<>]).{7,}$/;
 
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
  // === LIVE VALIDATION ===
  emailInput.addEventListener('input', () => {
   if (emailPattern.test(emailInput.value)) {

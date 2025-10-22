@@ -1,3 +1,26 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
   const classroomId = localStorage.getItem("viewClassroomId");
 
@@ -70,43 +93,45 @@ document.addEventListener("DOMContentLoaded", async () => {
       studentsEl.textContent = "No students yet.";
     }
     
-    let lessonIds = classroom.lessons;
-    if (typeof lessonIds === "string") {
-      try { lessonIds = JSON.parse(lessonIds); } catch { lessonIds = []; }
+    // --- Courses list instead of lessons ---
+    let courseIds = classroom.course_list;
+    if (typeof courseIds === "string") {
+      courseIds = courseIds.split(",").map(s => s.trim()).filter(Boolean);
+    } else if (!Array.isArray(courseIds)) {
+      courseIds = [];
     }
 
-    const lessonsList = document.getElementById("lessons-list");
-    lessonsList.innerHTML = "";
+    const coursesList = document.getElementById("lessons-list");
+    coursesList.innerHTML = "";
 
-    if (!lessonIds || lessonIds.length === 0) {
-      lessonsList.innerHTML = "<p>No lessons yet.</p>";
+    if (courseIds.length === 0) {
+      coursesList.innerHTML = "<p>No courses assigned to this classroom.</p>";
     } else {
-      // Fetch lessons using the IDs
-      const { data: lessons, error: lessonsError } = await supabase
-        .from("lessons")
-        .select("*")
-        .in("id", lessonIds);
+      // Fetch course details
+      const { data: courses, error: coursesError } = await supabase
+        .from("courses")
+        .select("id, title, description")
+        .in("id", courseIds);
 
-      if (lessonsError) throw lessonsError;
+      if (coursesError) throw coursesError;
 
-      // Create bullet list
       const ul = document.createElement("ul");
-      lessons.forEach(lesson => {
+      courses.forEach(course => {
         const li = document.createElement("li");
-        li.textContent = `${lesson.id} - ${lesson.description || ""}`;
+        li.textContent = `${course.id} - ${course.title || "Untitled Course"}`;
         li.style.cursor = "pointer";
-        li.classList.add("lesson-item");
+        li.classList.add("course-item");
 
         li.addEventListener("click", () => {
-          localStorage.setItem("viewLessonId", lesson.id); 
+          localStorage.setItem("viewCourseId", course.id);
           localStorage.setItem("cameFrom", "classroom");
-          window.location.href = "../LessonDetails/lesson_detail.html"; 
+          window.location.href = "../CourseDetails/course_detail.html";
         });
 
         ul.appendChild(li);
       });
 
-      lessonsList.appendChild(ul);
+      coursesList.appendChild(ul);
     }
 
     const { data: existingGrades, error: gradesError } = await supabase
@@ -145,6 +170,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         select.value = gradeMap[email];
       }
     });
+    
 
 
     // --- Auto-save on grade change ---
@@ -154,15 +180,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         const grade = select.value;
 
         try {
-          const { error } = await supabase
+          const { data: existing } = await supabase
             .from("grades")
-            .upsert([
-              {
-                classroom_id: classroomId,
-                student_email: email,
-                grade: grade
-              }
-            ]);
+            .select("id")
+            .eq("classroom_id", classroomId)
+            .eq("student_email", email)
+            .single();
+
+          let error;
+
+          if (existing) {
+            // update
+            ({ error } = await supabase
+              .from("grades")
+              .update({ grade })
+              .eq("id", existing.id));
+          } else {
+            // insert
+            ({ error } = await supabase
+              .from("grades")
+              .insert([{ classroom_id: classroomId, student_email: email, grade }]));
+          }
 
           if (error) throw error;
           console.log(`Grade saved for ${email}: ${grade}`);
@@ -176,5 +214,31 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (err) {
     console.error("Error loading course details:", err);
     alert("Failed to load course details.");
+  }
+});
+
+  // --- Role-based Back Button ---
+document.addEventListener("DOMContentLoaded", () => {
+  const backButton = document.getElementById("back-button");
+  if (backButton) {
+    backButton.addEventListener("click", () => {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      if (!user) {
+        window.history.back();
+        return;
+      }
+
+      // Navigate based on role
+      if (user.role === "instructor") {
+        window.location.href = "../InstructorClassroomPage/classroomPage.html";
+      } else if (user.role === "admin") {
+        window.location.href = "../AdminClassroomPage/admin_classroom_page.html";
+      } else if (user.role === "student") {
+        window.location.href = "../StudentClassroomPage/classroomPage.html";
+      } else {
+        // fallback
+        window.history.back();
+      }
+    });
   }
 });

@@ -35,17 +35,17 @@ h1 {
 
 .classroom-header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start;  /* previously center */
     align-items: center;
     gap: 10px;
-    padding-left: 10px; 
 }
 
-
-.classroom-id-title{
+.classroom-id-title {
     font-size: 1.5rem;
     font-weight: bold;
     color: black;
+    text-align: left;  /* ensure text stays aligned left */
+    width: 100%;       /* ensures alignment spans full width if needed */
 }
 
 .card p {
@@ -165,17 +165,19 @@ body.dark-mode .dots-btn {
 
 .draft-badge {
   position: absolute;
-  top: 42px;           /* move slightly below the dots */
-  right: 12px;         /* align with the dots horizontally */
-  background: linear-gradient(135deg, #fff453, #cfc400);
-  color: #555;
+  top: 12px;
+  right: 12px;  /* moved from left */
+
+  background: linear-gradient(135deg, #fff453, #cfc400); /* subtle gradient */
+  color: #555555;             /* darker gray for readability */
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
+
   padding: 4px 10px;
-  border-radius: 999px;
-  box-shadow: 0 2px 4px rgba(217, 211, 155, 0.1);
-  letter-spacing: 0.5px;
+  border-radius: 999px;    /* pill shape */
+  box-shadow: 0 2px 4px rgba(217, 211, 155, 0.1); /* soft shadow */
+  letter-spacing: 0.5px;   /* subtle spacing for cleaner look */
 }
 
 .publish-btn {
@@ -217,13 +219,15 @@ body.dark-mode .dots-btn {
 
 .archive-badge {
   position: absolute;
-  top: 42px;           /* same offset */
-  right: 12px;
-  background: linear-gradient(135deg, #ccc, #888);
-  color: #fff;
+  top: 12px;
+  right: 12px;  /* moved from left */
+
+  background: linear-gradient(135deg, #cccccc, #888888);
+  color: white;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
+
   padding: 4px 10px;
   border-radius: 999px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.15);

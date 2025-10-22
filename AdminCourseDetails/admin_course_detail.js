@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Make the entire link clickable and fill the li
         link.style.display = "block";
         link.style.textDecoration = "none"; 
-        link.style.color = "#09244d"; // adjust to your theme
+        link.classList.add("lesson-link"); // adjust to your theme
         link.style.padding = "5px 0";
         
         link.addEventListener("mouseover", () => {

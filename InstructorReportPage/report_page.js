@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
   
     if (!user || user.role !== "instructor") {
-      window.location.href = "/index.html";
+      window.location.href = "../login.html";
       return;
     }
   

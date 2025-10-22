@@ -6,14 +6,35 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const studentsContainer = document.getElementById("students-container");
 const teacherSelect = document.getElementById("teacher");
 
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
 function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
 }
 const editId = getQueryParam("id");
-// -------------------------
-// 2. Load Students from DB
-// -------------------------
+
 async function loadStudents() {
   const { data: students, error } = await supabase
     .from("users")
@@ -38,32 +59,24 @@ async function loadStudents() {
   });
 }
 
-async function loadLessons() {
-  const { data: lessons, error } = await supabase.from("lessons").select("*");
+async function loadCourses() {
+  const { data: courses, error } = await supabase
+    .from("courses")
+    .select("id, title");
+
   if (error) {
-    console.error("Error fetching lessons:", error);
+    console.error("Error fetching courses:", error);
     return;
   }
 
-  const container = document.getElementById("lessonContainer");
-  container.innerHTML = ""; // clear old
+  const select = document.getElementById("courseSelect");
+  select.innerHTML = '<option value="" disabled selected>-- Choose a course --</option>';
 
-  lessons.forEach(lesson => {
-    const box = document.createElement("div");
-    box.classList.add("lesson-box");
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = `lesson-${lesson.id}`;
-    checkbox.value = lesson.id; 
-
-    const label = document.createElement("label");
-    label.setAttribute("for", checkbox.id);
-    label.textContent = lesson.title; 
-
-    box.appendChild(checkbox);
-    box.appendChild(label);
-    container.appendChild(box);
+  courses.forEach(course => {
+    const opt = document.createElement("option");
+    opt.value = course.id;
+    opt.textContent = course.title;
+    select.appendChild(opt);
   });
 }
 
@@ -96,157 +109,44 @@ async function loadTeachers() {
 // -------------------------
 // Load classroom if editing
 // -------------------------
-async function loadClassroomForEdit(editId) {
-  const submitBtn = document.querySelector("#classroomForm button[type=submit]");
-  const { data, error } = await supabase
-    .from("classrooms")
-    .select("*")
-    .eq("id", editId)
-    .single();
+async function loadClassroomForEdit(id) {
+  const { data, error } = await supabase.from("classrooms").select("*").eq("id", id).single();
+  if (error) return console.error("Error fetching classroom:", error);
 
-  if (error) {
-    console.error("Error fetching classroom:", error);
-    return;
-  }
-
-  // Prefill inputs
   document.getElementById("classroomID").value = data.classroom_id;
   document.getElementById("classroomTitle").value = data.title || "";
   document.getElementById("startDate").value = data.start_date;
   document.getElementById("duration").value = data.duration;
   document.getElementById("owner").value = data.owner;
+  document.getElementById("courseSelect").value = data.course_list;
 
-  // Prefill lessons
-  let lessonIds = [];
-
-  // Handle both string and array cases
-  if (Array.isArray(data.lessons)) {
-    lessonIds = data.lessons;
-  } else if (typeof data.lessons === "string") {
-    try {
-      lessonIds = JSON.parse(data.lessons);
-    } catch (e) {
-      console.error("Error parsing lessons string:", data.lessons, e);
-    }
-  }
-
-  console.log("Prefilling lessons:", lessonIds);
-
-  lessonIds.forEach(lessonId => {
-    const cb = document.getElementById(`lesson-${lessonId}`);
-    if (cb) {
-      cb.checked = true;
-    } else {
-      console.warn("Checkbox not found for lesson:", lessonId);
-    }
-  });
-
-  // Prefill students
   if (Array.isArray(data.students)) {
-    data.students.forEach((studentEmail) => {
-      const cb = document.getElementById(`student-${studentEmail}`);
+    data.students.forEach(email => {
+      const cb = document.getElementById(`student-${email}`);
       if (cb) cb.checked = true;
     });
   }
 
-  // Prefill teacher
-  if (data.owner) {
-    teacherSelect.value = data.owner;
-  }
-
-  // Change button text
-  submitBtn.textContent = "Update Classroom";
+  document.querySelector("#classroomForm button[type=submit]").textContent = "Update Classroom";
 }
 
-document.getElementById("classroomForm").addEventListener("submit", async (event) => {
-    event.preventDefault()
-
-    const classroomID = document.getElementById("classroomID").value;
-    const classroomTitle = document.getElementById("classroomTitle").value;
-    const lessons = Array.from(
-      document.querySelectorAll("#lessonContainer input[type=checkbox]:checked")
-    ).map(cb => cb.value);
-    const startDate = document.getElementById("startDate").value;
-    const duration = parseInt(document.getElementById("duration").value);
-    const students = Array.from(
-        document.querySelectorAll("#students-container input[type=checkbox]:checked")
-    ).map(cb => cb.value);
-    const owner = document.getElementById("owner").value;
-    
-    let result;
-    if (editId) {
-      // 🔹 UPDATE if editing
-      result = await supabase
-        .from("classrooms")
-        .update({
-          classroom_id: classroomID,
-          title: classroomTitle,
-          lessons,
-          owner,
-          start_date: startDate,
-          duration,
-          students
-        })
-        .eq("id", editId);  // match by primary key
-    } else {
-      result = await supabase
-          .from("classrooms")
-          .insert([
-              {
-                  classroom_id: classroomID,
-                  title: classroomTitle, 
-                  lessons: lessons,
-                  owner: owner,
-                  start_date: startDate,
-                  duration: duration,
-                  students: students,          // single student
-              }
-          ]);
-      }
-    const { data, error } = result;
-    
-    if (error) {
-        alert("Error creating classroom: " + error.message);
-        console.error(error);
-    } else {
-        alert(editId? "Classroom updates successfully!" : "Classroom created successfully!");
-        console.log(data);
-        // redirect to classroom list page
-        window.location.href = "../InstructorClassroomPage/classroomPage.html";
-    }
-});
-
 document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    // Run in parallel
-    await Promise.all([
-      loadStudents(),
-      loadTeachers(),
-      loadLessons()
-    ]);
+  await Promise.all([loadStudents(), loadTeachers(), loadCourses()]);
 
-    // Only after lessons/students/teachers are loaded,
-    // fetch classroom if editing
-    if (editId) {
-      await loadClassroomForEdit(editId);
-    } else {
-      
-      const user = JSON.parse(localStorage.getItem("loggedInUser"));
-      if (user && user.role === "instructor") {
-        document.getElementById("owner").value = user.email;
-      }
-    }
-  } catch (err) {
-    console.error("Error during page load:", err);
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (user && user.role === "instructor") {
+    document.getElementById("owner").value = user.email;
+  }
+
+  if (editId) {
+    await loadClassroomForEdit(editId);
   }
 });
 
 async function handleSave(isDraft) {
-  const classroomID = document.getElementById("classroomID").value;
-  const classroomTitle = document.getElementById("classroomTitle").value;
-  const lessons = Array.from(
-    document.querySelectorAll("#lessonContainer input[type=checkbox]:checked")
-  ).map(cb => cb.value);
+  const classroomID = document.getElementById("classroomID").value.trim();
+  const classroomTitle = document.getElementById("classroomTitle").value.trim();
+  const course_list = document.getElementById("courseSelect").value;
   const startDate = document.getElementById("startDate").value;
   const duration = parseInt(document.getElementById("duration").value);
   const students = Array.from(
@@ -254,37 +154,93 @@ async function handleSave(isDraft) {
   ).map(cb => cb.value);
   const owner = document.getElementById("owner").value;
 
+  if (!classroomID || !classroomTitle || !course_list || !startDate || !duration || !owner) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  if (!editId) {
+    const { data: existing } = await supabase
+      .from("classrooms")
+      .select("id")
+      .eq("classroom_id", classroomID);
+
+    if (existing && existing.length > 0) {
+      alert("A classroom with this ID already exists. Please choose a different Classroom ID.");
+      return;
+    }
+  }
+
+  const { data: courseData, error: courseError } = await supabase
+    .from("courses")
+    .select("Students_Enrolled")
+    .eq("id", course_list)
+    .single();
+
+  if (courseError) {
+    console.error("Error fetching course data:", courseError);
+    alert("Error checking course enrollment.");
+    return;
+  }
+
+  const enrolledStudents = Array.isArray(courseData.Students_Enrolled)
+    ? courseData.Students_Enrolled
+    : JSON.parse(courseData.Students_Enrolled || "[]");
+
+  const notEnrolled = students.filter(s => !enrolledStudents.includes(s));
+
+  if (notEnrolled.length > 0) {
+    console.error("These students are not enrolled in the selected course:", notEnrolled);
+    alert(`Error: Some selected students are not enrolled in the chosen course.\n\n${notEnrolled.join(", ")}`);
+    return;
+  }
+
+  const { data: allClassrooms, error: classError } = await supabase
+    .from("classrooms")
+    .select("id, students");
+
+  if (classError) {
+    console.error("Error fetching classrooms:", classError);
+    alert("Error verifying student assignments.");
+    return;
+  }
+
+  // Flatten classroom student lists (ignore current one if editing)
+  const existingAssignments = new Map();
+  allClassrooms.forEach(c => {
+    if (editId && c.id === editId) return; // skip current edit classroom
+    if (Array.isArray(c.students)) {
+      c.students.forEach(stu => existingAssignments.set(stu, true));
+    }
+  });
+
+  const alreadyAssigned = students.filter(s => existingAssignments.has(s));
+  if (alreadyAssigned.length > 0) {
+    alert(`Error: These students are already assigned to another classroom.\n\n${alreadyAssigned.join(", ")}`);
+    return;
+  }
+
   const classroomData = {
     classroom_id: classroomID,
     title: classroomTitle,
-    lessons,
+    course_list,
     owner,
     start_date: startDate,
     duration,
     students,
-    "Draft Mode": isDraft   // <-- 🔹 mark draft status
+    "Draft Mode": isDraft
   };
 
-  let result;
-  if (editId) {
-    // UPDATE
-    result = await supabase
-      .from("classrooms")
-      .update(classroomData)
-      .eq("id", editId);
-  } else {
-    // INSERT
-    result = await supabase
-      .from("classrooms")
-      .insert([classroomData]);
-  }
+  const query = editId
+    ? supabase.from("classrooms").update(classroomData).eq("id", editId)
+    : supabase.from("classrooms").insert([classroomData]);
 
-  const { error } = result;
+  const { error } = await query;
   if (error) {
     alert("Error saving classroom: " + error.message);
     console.error(error);
   } else {
-    alert(isDraft ? "Classroom saved as draft!" : "Classroom published!");
+    alert(isDraft ? "Classroom saved as draft!" : "Classroom published successfully!");
     window.location.href = "../InstructorClassroomPage/classroomPage.html";
   }
 }

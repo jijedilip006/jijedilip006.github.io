@@ -31,6 +31,7 @@ h1 {
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
+
 .course-meta p {
   font-size: 1rem;
   margin: 0.5rem 0;
@@ -46,10 +47,31 @@ h1 {
   color: #09244d;
 }
 
+body.dark-mode h2 {
+  color: #9dc1ff;
+}
+
 .lessons-list {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+}
+
+.lesson-link {
+  color: #09244d;
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
+}
+
+.lesson-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Dark mode link color */
+body.dark-mode .lesson-link {
+  color: white; /* light blue for dark mode */
 }
 
 .lesson-card {
@@ -171,8 +193,12 @@ body.dark-mode h1 {
 
 body.dark-mode .content {
   background-color: #1e1e1e;
-  color: #f0f0f0;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid #d5e5ff;
+}
+
+body.dark-mode .content:hover {
+  box-shadow: 0 6px 16px rgba(186, 222, 255, 0.4);
 }
 
 body.dark-mode .lesson-card {
@@ -184,13 +210,17 @@ body.dark-mode .lesson-card:hover {
   background-color: #333333;
 }
 
+body.dark-mode .lessons-list p {
+  color: white;
+}
+
 body.dark-mode .center-button .button {
-  background-color: #3b82f6;
+  background-color: #007bff;
   color: white;
 }
 
 body.dark-mode .center-button .button:hover {
-  background-color: #2563eb;
+  background-color: #0056b3;
 }
 
 body.dark-mode .theme-toggle .fa-sun {

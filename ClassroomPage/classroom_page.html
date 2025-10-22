@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <title>Create Classroom</title>
     <link rel="stylesheet" href="classroom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body class="create-classroom">
     <header>
         Lesson Management System
+         <div class="theme-toggle">
+    <i class="fa-solid fa-sun"></i>
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider"></span>
+    </label>
+    <i class="fa-solid fa-moon"></i>
+  </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </header>
 
     <h1>Create Classroom</h1>
@@ -63,16 +74,13 @@
         </select>
     </div>
 
-    <div class="row">
-        <div class="column">
-            <div class="form-group">
-                <fieldset>
-                    <legend>Select Lesson</legend>
-                    <div id="lessonContainer">
-                    </div>
-                </fieldset>
-            </div>
-        </div>
+    <div class="form-group">
+    <fieldset>
+        <legend>Choose Course</legend>
+        <select id="courseSelect" required>
+        <option value="" disabled selected>-- Choose a course --</option>
+        </select>
+    </fieldset>
     </div>
 
         <div class="form-group">

@@ -43,6 +43,29 @@ async function loadClassrooms() {
     return;
   }
 
+  // Step 1: Check if student already in a classroom
+  const { data: existing, error: existingError } = await supabase
+    .from("classrooms")
+    .select('classroom_id,"Draft Mode",Archived,students')
+    .contains("students", JSON.stringify([user.email]));
+
+  if (existingError) {
+    console.error("Error checking enrollment:", existingError);
+    showMessage("Error verifying your classroom enrollment.", "error");
+    return;
+  }
+  const activeEnrollment = (existing || []).some(
+    (cls) => !cls["Draft Mode"] && !cls.Archived
+  );
+
+  if (activeEnrollment) {
+    showMessage("You are already enrolled in a classroom. Please unenroll first.", "info");
+    setTimeout(() => {
+      window.location.href = "../Login page/student/student.html";
+    }, 1500);
+    return;
+  }
+
   if (!selectedCourseId) {
     classroomList.innerHTML = `<tr><td colspan="6">No selected course found. Please enroll in a course first.</td></tr>`;
     return;
@@ -67,13 +90,16 @@ async function loadClassrooms() {
 
   //  Filter classrooms that contain the selected course
   const validClassrooms = classrooms.filter((c) => {
-  const list = c.course_list;
-  if (Array.isArray(list)) return list.includes(selectedCourseId);
-  if (typeof list === "string") {
-    return list.split(",").map((x) => x.trim()).includes(selectedCourseId);
-  }
-  return false;
-  });
+    // Skip if classroom is Draft or Archived
+    if (c["Draft Mode"] === true || c["Archived"] === true) return false;
+
+    const list = c.course_list;
+    if (Array.isArray(list)) return list.includes(selectedCourseId);
+    if (typeof list === "string") {
+      return list.split(",").map((x) => x.trim()).includes(selectedCourseId);
+    }
+    return false;
+    });
 
   if (validClassrooms.length === 0) {
     classroomList.innerHTML = `<tr><td colspan="6">No classrooms found for this course.</td></tr>`;
@@ -127,7 +153,7 @@ async function loadClassrooms() {
       <td>${classroom.owner || "Unknown"}</td>
       <td>${courseTitles.join(", ")}</td>
       <td>${totalLessons}</td>
-      <td><button class="allocate-btn" data-id="${classroom.id}">Allocate</button></td>
+      <td><button type="button" class="allocate-btn" data-id="${classroom.id}">Allocate</button></td>
     `;
     classroomList.appendChild(row);
   }
@@ -187,7 +213,7 @@ async function allocateClassroom(classroomId) {
       return;
     }
 
-  showMessage(`Successfully allocated to classroom ${classroomId}!`, "success");
+  showMessage(`Successfully allocated to classroom!`, "success");
 }
 
 // Utility: Show temporary message
@@ -197,8 +223,7 @@ function showMessage(text, type = "info") {
   messageDiv.className = `message ${type}`;
 
   setTimeout(() => {
-    messageDiv.textContent = "";
-    messageDiv.className = "message";
-  }, 3000);
+    window.location.href = "../Login page/student/student.html";
+  }, 100);
 }
 

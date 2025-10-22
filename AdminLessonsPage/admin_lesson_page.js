@@ -116,7 +116,7 @@ async function displayLessons(){
                 </div>
                 <div class="lesson-header">
                     ${draftStatus}
-                    <span class="lesson-id-title">${lesson.id} - ${lesson.title}</span>
+                    <span class="lesson-id-title">${lesson.id}</span>
                 </div>
                 <p><strong>Credit Points:</strong> ${lesson.creditPoints}</p>
                 <p><strong>Owner:</strong> ${lesson.owner}</p>

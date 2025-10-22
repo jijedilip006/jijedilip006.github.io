@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Course</title>
-  <link rel="stylesheet" href="admin_course_form.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
+    <meta charset = "UTF-8">
+    <title>Create Course(Admin)</title>
+    <link rel = "stylesheet" href = "admin_course_form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <header class="header">
-    <h1>Learning Management System</h1>
+</head>
+
+<body>
+    <header>
+        Learning Management System
          <div class="theme-toggle">
         <i class="fa-solid fa-sun"></i>
         <label class="switch">
@@ -20,57 +20,65 @@
         <i class="fa-solid fa-moon"></i>
     </div>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  </header>
+    </header>
 
-  <main class="form-container">
-    <h2>Create or Edit Course</h2>
-    <form id="courseForm">
-      <div class="form-group">
-        <label for="ID">Course ID</label>
-        <input type="text" id="ID" placeholder="Enter course ID">
-      </div>
+    <h1>Create Course</h1>
 
-      <div class="form-group">
-        <label for="title">Course Title</label>
-        <input type="text" id="title" placeholder="Enter course title">
-      </div>
-
-      <div class="form-group">
-        <label for="owner">Course Owner</label>
-        <select id="owner">
-          <option value="">-- Select owner --</option>
-          <option ></option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="description">Course Description</label>
-        <textarea id="description" placeholder="Write course description here..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Lessons</label>
-        <div id="lesson" class="lesson-list">
-          <label><input type="checkbox" value="lesson1"> </label>
-          <label><input type="checkbox" value="lesson2"> </label>
-          <label><input type="checkbox" value="lesson3"></label>
+    <form id = "courseForm">
+        <div class="form-header">
+            <a href="../InstructorCoursesPage/course_page.html" class="cancel-link">cancel</a>
+            <a href="#" class="save-and-close" id="save-and-close">Save & Close</a>
         </div>
-      </div>
+    
+            <div class = "row">
+                <div class = "column">
+                    <div class = "form-group">
+                        <label for = "ID">Course ID</label>
+                        <input type = "text" id = "ID" name = "ID" required>
+                    </div>
+                </div>
 
-      <div class="button-group">
-        <button type="button" id="save-and-close" class="secondary-btn">Save & Close</button>
-        <button type="submit" id="create-course" class="primary-btn">Create Course</button>
-      </div>
+                <div class="column">
+                    <div class="form-group">
+                      <label for="title">Course Title</label>
+                      <input type="text" id="title" name="title" required>
+                    </div>
+                  </div>
+
+                <div class = "column">
+                    <div class="form-group">
+                        <label for="owner">Owner of Course</label>
+                        <select id="owner" name="owner" required>
+                          <!-- Will be filled dynamically -->
+                        </select>
+                      </div>
+                </div>
+            </div>
+            <div class = "form-group">
+                <fieldset>
+                    <legend>Lessons</legend>
+                    <div id="lesson"></div> <!-- checkboxes will be added here -->
+                  </fieldset>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Course Description</label>
+                <textarea id="description" name="description" rows="4" placeholder="Enter course description..." required ></textarea>
+            </div>
+
+
+
+        <button type = "submit" id="create-course">Create Course</button>
     </form>
+    <center><a href = "../Login page/admin/admin.html" class = "button" id = "admin_pageBtn">Go back to Admin page</a></center>
 
-    <button class="back-btn" onclick="window.location.href='../AdminCoursesPage/admin_course_page.html'">Back</button>
-  </main>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
+     <script>
      const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";   // replace
      const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";              // replace
      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
      </script>
-    <script src="admin_create_course.js"></script>
+     <script src="admin_create_course.js"></script>
 
 </body>
 </html>

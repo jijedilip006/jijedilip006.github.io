@@ -1,3 +1,67 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
+// Handle "Back" button dynamically
+document.addEventListener("DOMContentLoaded", () => {
+  const backButton = document.getElementById("back-button");
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  const cameFrom = localStorage.getItem("cameFrom");
+
+  if (!backButton) return;
+
+  backButton.addEventListener("click", () => {
+    console.log("Back triggered from course_detail, cameFrom =", cameFrom);
+
+    // If came from classroom
+    if (cameFrom === "classroom") {
+      window.location.href = "../ClassroomDetails/classroom_detail.html";
+      localStorage.removeItem("cameFrom"); // end of chain
+      return;
+    }
+
+    // If came from main course list
+    if (cameFrom === "courses") {
+      if (user?.role === "admin") {
+        window.location.href = "../AdminCoursesPage/course_page.html";
+      } else {
+        window.location.href = "../InstructorCoursePage/coursePage.html";
+      }
+      localStorage.removeItem("cameFrom");
+      return;
+    }
+
+    // Otherwise fallback by role
+    if (user?.role === "admin") {
+      window.location.href = "../AdminCoursesPage/course_page.html";
+    } else if (user?.role === "instructor") {
+      window.location.href = "../InstructorCoursesPage/course_page.html";
+    } else {
+      window.history.back();
+    }
+  });
+});
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   const courseId = localStorage.getItem("viewCourseId");
 
@@ -68,8 +132,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         link.addEventListener("click", () => {
           localStorage.setItem("viewLessonId", lesson.id);
-          localStorage.setItem("cameFrom", "course"); 
-          localStorage.setItem("previousPage", "../CourseDetails/course_detail.html");
+
+          // Only set cameFrom if it's not already set (preserve classroom -> course chain)
+          if (!localStorage.getItem("cameFrom")) {
+            localStorage.setItem("cameFrom", "course");
+          }
+
+          localStorage.setItem("previousPage", window.location.href);
           window.location.href = "../LessonDetails/lesson_detail.html";
         });
 

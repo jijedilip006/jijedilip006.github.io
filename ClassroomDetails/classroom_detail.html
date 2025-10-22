@@ -4,13 +4,22 @@
   <meta charset="UTF-8">
   <title>Classroom Details</title>
   <link rel="stylesheet" href="classroom_detail.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
   <header>
-
     Learning Management System
-
+      <div class="theme-toggle">
+    <i class="fa-solid fa-sun"></i>
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider"></span>
+    </label>
+    <i class="fa-solid fa-moon"></i>
+  </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   </header>
 
   <h1>Classroom Details</h1>
@@ -26,9 +35,9 @@
         <!-- lesson updated-->
 
     <section class="lessons-section">
-      <h2>Lessons List</h2>
+      <h2>Courses List</h2>
       <div id="lessons-list">
-        <p>Loading lessons...</p>
+        <p>Loading courses...</p>
       </div>
     </section>
 
@@ -49,18 +58,16 @@
     </div>
 
     <div class="center-button">
-      <a href="../InstructorClassroomPage/classroomPage.html" class="button">Back to Classrooms</a>
+      <button id="back-button" class="button">Back to Classrooms</a>
     </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
-     <script>
-        <!-- updated link-->
-
-     const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";   
-     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";              // replace
-     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-     </script>
+  <script>
+  const SUPABASE_URL = "https://mavdxyhwlfyzyarukwbr.supabase.co";   // replace
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdmR4eWh3bGZ5enlhcnVrd2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjc3MjYsImV4cCI6MjA3Mzc0MzcyNn0.ZCvZ8IYV6QzXZN5dNC7NxZIXZl0YBI2ThjBLisfebYQ";              // replace
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  </script>
   <script src="classroom_detail.js"></script>
 
 </body>

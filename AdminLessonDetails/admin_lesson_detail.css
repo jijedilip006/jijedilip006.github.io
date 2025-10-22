@@ -31,6 +31,20 @@ h1 {
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
+body.dark-mode .content {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #d5e5ff;
+}
+
+body.dark-mode .content:hover {
+  box-shadow: 0 6px 16px rgba(186, 222, 255, 0.4);
+}
+
+body.dark-mode h2 {
+  color: #9dc1ff;
+}
+
 .course-meta p {
   font-size: 1rem;
   margin: 0.5rem 0;
@@ -81,6 +95,7 @@ h1 {
   cursor: pointer;
   font-family: inherit;
   margin: 6px;
+  font-size: 16px;
   text-align: center;
 }
 

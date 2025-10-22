@@ -88,3 +88,125 @@ h1 {
 .button:hover {
   background-color: #0056b3;
 }
+/* Container for the toggle and icons */
+.theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  color: var(--text-color, #000);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 19px;
+  width: 19px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+  background-color: #4a90e2;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.theme-toggle .fa-sun {
+  color: white;
+}
+
+.theme-toggle .fa-moon {
+  color: black;
+}
+/* ==============================
+   DARK MODE STYLES
+   ============================== */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-mode header {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+
+body.dark-mode h1 {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+
+body.dark-mode form {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode th {
+  background-color: #333;
+  color: #ffffff;
+}
+
+body.dark-mode td {
+  background-color: #1c1c1c;
+  color: #f0f0f0;
+}
+
+body.dark-mode tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+body.dark-mode tr:hover {
+  background-color: #333333;
+}
+
+body.dark-mode .center-button .button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+body.dark-mode .center-button .button:hover {
+  background-color: #2563eb;
+}
+
+body.dark-mode .theme-toggle .fa-sun {
+  color: #f5c542;
+}
+
+body.dark-mode .theme-toggle .fa-moon {
+  color: #ffffff;
+}

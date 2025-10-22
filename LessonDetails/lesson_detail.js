@@ -1,3 +1,26 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
     const lessonId = localStorage.getItem("viewLessonId");
   
@@ -33,40 +56,50 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error("Error loading lesson details:", err);
       alert("Failed to load lesson details.");
     }
-    // Handle back button
-    const backBtn = document.getElementById("backBtn");
-    const cameFrom = localStorage.getItem("cameFrom");
-    // Change the label based on where user came from
-    if (cameFrom === "course") {
-        backBtn.textContent = "Back to Course";
-    } else if (cameFrom === "classroom") {
-        backBtn.textContent = "Back to Classroom";
-    } else {
-        backBtn.textContent = "Back to Lessons";
+  });
+    // --- Role & Context-Based Back Button ---
+document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+  const cameFrom = localStorage.getItem("cameFrom");
+  const previousPage = localStorage.getItem("previousPage");
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  // Adjust button label
+  if (cameFrom === "course") {
+    backBtn.textContent = "Back to Course";
+  } else if (cameFrom === "classroom") {
+    backBtn.textContent = "Back to Classroom";
+  } else {
+    backBtn.textContent = "Back";
+  }
+
+  backBtn.addEventListener("click", () => {
+    // If we saved the actual previous URL → go there
+    if (previousPage) {
+      window.location.href = previousPage;
+      localStorage.removeItem("previousPage");
+      return;
     }
 
-    backBtn.addEventListener("click", () => {
-        
-        if (cameFrom === "course") {
-            const prevPage = localStorage.getItem("previousPage");
-            if (prevPage) {
-                window.location.href = prevPage; // go back to the exact page (could be classroom or course)
-            } 
-            localStorage.removeItem("cameFrom");
-            localStorage.removeItem("previousPage");
-        } else if (cameFrom === "classroom") {
-            const classroomId = localStorage.getItem("viewClassroomId");
-            if (classroomId) {
-                window.location.href = "../ClassroomDetails/classroom_detail.html";
-            } else {
-                window.location.href = "../InstructorClassroomPage/classroomPage.html";
-            }
-            localStorage.removeItem("cameFrom");
-        } else {
-            window.location.href = "../InstructorLessonsPage/lesson_page.html";
-        }
-    });
+    // Go based on context
+    if (cameFrom === "classroom") {
+      window.location.href = "../ClassroomDetails/classroom_detail.html";
+    } else if (cameFrom === "course") {
+      window.location.href = "../CourseDetails/course_detail.html";
+    } else if (user) {
+      // Role-based fallback
+      if (user.role === "admin") {
+        window.location.href = "../AdminLessonsPage/lesson_page.html";
+      } else if (user.role === "instructor") {
+        window.location.href = "../InstructorLessonsPage/lesson_page.html";
+      } else {
+        window.history.back();
+      }
+    } else {
+      window.history.back();
+    }
+
+    // cleanup
+    localStorage.removeItem("cameFrom");
+  });
 });
-
-
-  

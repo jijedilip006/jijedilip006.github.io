@@ -82,9 +82,18 @@ header h1 {
 
 }
 
+body.dark-mode .lesson-card {
+  background-color: #1f1f1f;
+  border: 1px solid #d5e5ff;
+}
+
 .lesson-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+body.dark-mode .lesson-card:hover {
+  box-shadow: 0 6px 16px rgba(186, 222, 255, 0.4);
 }
 
 .lesson-card h2 {
@@ -102,8 +111,17 @@ header h1 {
 .lesson-header {
     font-size: 1.4rem; /* same as course card h3 */
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-top: 40px;
     color: #09244d;
+}
+
+body.dark-mode .lesson-id-title {
+  color: #9dc1ff;
+}
+
+body.dark-mode .lesson-card p {
+  color: white;
 }
 
 /* Lesson ID and title */
@@ -119,6 +137,7 @@ header h1 {
     font-weight: 500;
     margin: 5px 0;
     color: #333;
+    text-align: left;
 }
 
 
@@ -127,6 +146,10 @@ header h1 {
     background: none;
     border: none;
     cursor: pointer;
+}
+
+body.dark-mode .dots-btn {
+  color:white;
 }
 
 .menu-content {
@@ -171,23 +194,23 @@ header h1 {
 .center-button {
     text-align: center;
     margin-top: 20px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
 }
 
 .draft-badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
-
-  background: linear-gradient(135deg, #fff453, #cfc400); /* subtle gradient */
-  color: #555555;             /* darker gray for readability */
+  top: 42px;           /* move slightly below the dots */
+  right: 12px;         /* align with the dots horizontally */
+  background: linear-gradient(135deg, #fff453, #cfc400);
+  color: #555;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-
   padding: 4px 10px;
-  border-radius: 999px;    /* pill shape */
-  box-shadow: 0 2px 4px rgba(217, 211, 155, 0.1); /* soft shadow */
-  letter-spacing: 0.5px;   /* subtle spacing for cleaner look */
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(217, 211, 155, 0.1);
+  letter-spacing: 0.5px;
 }
 
 .publish-btn {
@@ -229,15 +252,13 @@ header h1 {
 
 .archive-badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
-
-  background: linear-gradient(135deg, #cccccc, #888888);
-  color: white;
+  top: 42px;           /* same offset */
+  right: 12px;
+  background: linear-gradient(135deg, #ccc, #888);
+  color: #fff;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-
   padding: 4px 10px;
   border-radius: 999px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.15);
@@ -375,12 +396,12 @@ body.dark-mode tr:hover {
 }
 
 body.dark-mode .center-button .button {
-  background-color: #3b82f6;
+  background-color: #007bff;
   color: white;
 }
 
 body.dark-mode .center-button .button:hover {
-  background-color: #2563eb;
+  background-color: #0056b3;
 }
 
 body.dark-mode .theme-toggle .fa-sun {

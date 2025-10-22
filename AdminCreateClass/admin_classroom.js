@@ -203,7 +203,7 @@ async function handleSave(isDraft) {
   // Flatten classroom student lists (ignore current one if editing)
   const existingAssignments = new Map();
   allClassrooms.forEach(c => {
-    if (editId && c.id === parseInt(editId)) return; // skip current edit classroom
+    if (editId && c.id === editId) return; // skip current edit classroom
     if (Array.isArray(c.students)) {
       c.students.forEach(stu => existingAssignments.set(stu, true));
     }

@@ -4,11 +4,21 @@
   <meta charset="UTF-8">
   <title>Course Details</title>
   <link rel="stylesheet" href="course_detail.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
     <header>
         Learning Management System
+            <div class="theme-toggle">
+        <i class="fa-solid fa-sun"></i>
+        <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+        </label>
+        <i class="fa-solid fa-moon"></i>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </header>
 
     <h1>Course Details</h1>
@@ -33,7 +43,7 @@
 
         <!-- Back Button -->
         <div class="center-button">
-        <a href="../InstructorCoursesPage/course_page.html" class="button">Back to Courses</a>
+            <button id="back-button" class="button">Back</a>
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/umd/supabase.min.js"></script>
