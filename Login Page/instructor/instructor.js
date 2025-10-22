@@ -14,6 +14,28 @@ if (user && user.role === "instructor") {
   window.location.href = "login.html";
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
 
 // Dropdown toggle
 const userBtn = document.querySelector(".user-btn");
