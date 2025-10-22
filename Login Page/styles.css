@@ -70,7 +70,11 @@ label {
     margin-bottom: 8px;
     font-weight: 600;
     color: #000000;
-    text-align: center;   
+    text-align: center;  
+}
+
+body.dark-mode label {
+  color:white;
 }
 
 input, textarea, select {
@@ -102,11 +106,16 @@ input, textarea, select {
     color: white;
     text-decoration: none;
     border-radius: 5px;
+    font-size: 16px;
     border: none;
     cursor: pointer;
     font-family: inherit;
     margin: 6px;
     text-align: center;
+}
+
+.unenroll-btn:hover {
+  background-color: #0056b3;
 }
 
 .button:hover {
@@ -121,10 +130,12 @@ a{
   color: white;
   background-color: #09244d;
   font-weight: bold;
-  padding: 20px 30px;
+  padding: 70px 30px 30px 30px;
+  margin-top: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .instructor-dashboard h1 {
@@ -241,6 +252,7 @@ a{
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  margin-right: 20px;
 }
 
 .instructor-dashboard .dash-card {
@@ -304,10 +316,17 @@ a{
   color: white;
   background-color: #09244d;
   font-weight: bold;
-  padding: 30px;
+  padding: 50px 30px 30px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.student-dashboard .header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* spacing between toggle and user menu */
 }
 
 .student-dashboard h1 {
@@ -371,6 +390,20 @@ a{
   padding: 15px;
 }
 
+body.dark-mode .user-btn {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+body.dark-mode .enroll-box {
+  background-color: #1f1f1f;
+  color: white; 
+}
+
+body.dark-mode h2 {
+  color: white;
+}
+
 .student-dashboard .user-info {
   text-align: left;
   margin-bottom: 10px;
@@ -419,15 +452,65 @@ a{
 .student-dashboard h2 {
   margin-left: 3rem;
 }
+.admin-dashboard .instructors-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard .instructors-card h2 {
+  color: #09244d;
+  margin-bottom: 15px;
+  font-size: 22px;
+  text-align: left;
+}
+
+.admin-dashboard .instructors-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.admin-dashboard .instructors-card th,
+.admin-dashboard .instructors-card td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.admin-dashboard .instructors-card th {
+  background-color: #09244d;
+  color: white;
+  text-transform: uppercase;
+}
+
+.admin-dashboard .instructors-card tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.admin-dashboard .instructors-card tr:hover {
+  background-color: #f1f1f1;
+}
 
 .admin-dashboard header {
   color: white;
   background-color: #09244d;
   font-weight: bold;
-  padding: 20px 30px;
+  padding: 50px 30px 30px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.admin-dashboard .header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* spacing between toggle and user menu */
 }
 
 .admin-dashboard h1 {
@@ -541,15 +624,24 @@ a{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+body.dark-mode .card {
+  background-color: #1f1f1f;
+}
+
 .admin-dashboard .card h2 {
   color: #09244d;
   margin-bottom: 15px;
 }
 
 .admin-dashboard .profile-info p {
-  font-size: 16px;
+  font-size: 20px;
   margin: 8px 0;
   color: #333;
+  text-align: left;
+}
+
+body.dark-mode .profile-info p {
+  color: white;
 }
 
 .admin-dashboard .back-btn {
@@ -608,48 +700,94 @@ a{
   background-color: #f1f1f1;
 }
 
-
-
-#course-status {
-  max-width: 600px;
-  margin: 2rem 0 0 2rem;   
-  text-align: left;   
+.admin-dashboard .registrations-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
+
+body.dark-mode .registrations-card h2 {
+  color:#9dc1ff;
+}
+
+.admin-dashboard .registrations-card th,
+.admin-dashboard .registrations-card td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.admin-dashboard .registrations-card th {
+  background-color: #09244d; 
+  color: white;
+  text-transform: uppercase;
+}
+
+.admin-dashboard .registrations-card tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.admin-dashboard .registrations-card tr:hover {
+  background-color: #f1f1f1;
+}
+
+.admin-dashboard .registrations-card h2 {
+  color: #09244d;
+  margin-bottom: 15px;
+  font-size: 22px;
+  text-align: left;
+}
+
 
 .course-box,
 .enroll-box {
   background: #ffffff;
-  border: 1px solid #e0e0e0;
   border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 0px 0px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   width: 100%;            
-  max-width: 500px; 
+  max-width: 500px;
+  margin-bottom: 20px;
 }
 
-.course-box:hover,
-.enroll-box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+body.dark-mode .course-box,
+body.dark-mode .enroll-box {
+  background: #1f1f1f; /* dark gray background */
+  color: white;      /* light text */
+}
+
+body.dark-mode .course-box strong,
+body.dark-mode .enroll-box h2 {
+  color: white; /* soft blue accent for key text */
+}
+
+body.dark-mode .course-box small {
+  color: #ccc;
 }
 
 .enroll-box h2 {
   margin-top: 0;
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 20px;
   color: #333;
 }
 
 .course-box p {
   margin: 0.5rem 0;
-  font-size: 1rem;
+  font-size: 18px;
   color: #000000;
+  text-align: left;
+  margin-top: 15px;
+}
+
+body.dark-mode .course-box p {
+  color: white;
 }
 
 .course-box .course-id {
-  font-size: 1.5rem;   /* bigger than the rest */
-  font-weight: bold;
+  font-size: 25px;   /* bigger than the rest */
   color: #000000;      /* dark highlight color */
 }
 
@@ -660,15 +798,14 @@ a{
 
 .enroll-box .button {
   display: inline-block;
-  margin-top: 1.2rem;
-  padding: 0.6rem 1.2rem;
+  padding: 10px 25px;
   background: #007bff;
   color: #fff;
   border-radius: 8px;
   text-decoration: none;
-  font-weight: 600;
+  font-size: 16px;
   margin-left: 165px;
-  transition: background 0.2s ease;
+  transition: background 0.3s ease;
 }
 
 .enroll-box .button:hover {
@@ -729,20 +866,21 @@ a{
 
 .course-card h2 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.4rem;
+  font-size: 28px;
   font-weight: bold;
   color: #09244d;
 }
 
 .course-card p {
   margin: 0.3rem 0;
-  font-size: 1.0rem;
+  font-size: 17px;
   color: #000000;
   text-align: left;
   font-weight: normal;
 }
 
 .course-card .enroll-btn {
+  font-family: inherit;
   margin-top: 1rem;
   align-self: flex-start;
   padding: 0.6rem 1.2rem;
@@ -750,8 +888,7 @@ a{
   color: #fff;
   border: none;
   border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 16px;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease;
 }
@@ -759,6 +896,23 @@ a{
 .course-card .enroll-btn:hover {
   background: #0056b3;
   transform: translateY(-2px);
+}
+
+body.dark-mode .course-card h2 {
+  color: #9dc1ff;
+}
+
+body.dark-mode .course-card p {
+  color:white
+}
+
+body.dark-mode .course-card {
+  background-color: #1f1f1f;
+  border: 1px solid #d5e5ff;
+}
+
+body.dark-mode .course-card:hover {
+  box-shadow: 0 6px 16px rgba(186, 222, 255, 0.4);
 }
 
 @media (max-width: 900px) {
@@ -777,7 +931,7 @@ a{
   color: white;
   background-color: #09244d;
   font-weight: bold;
-  padding: 30px;
+  padding: 40px;
 }
 
 .enroll-page header h1 {
@@ -788,6 +942,27 @@ a{
   background-color: #09244d;
   font-weight: bold;
   font-size: 50px;         
+}
+
+.enroll-page .center-button {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  margin: 30px 0;
+}
+
+.enroll-page .center-button a {
+  display: inline-block;
+  padding: 12px 25px;       /* button size */
+  background-color: #007bff; /* button color */
+  color: white;             /* text color */
+  text-decoration: none;    /* remove underline */
+  border-radius: 8px;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.enroll-page .center-button a:hover {
+  background-color: #0056b3; /* darker on hover */
 }
 
 .lessons-page {
@@ -1066,6 +1241,11 @@ body.lesson-detail-page {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+body.dark-mode .profile-container {
+  background-color: #1f1f1f;
+  border: 1px solid #d5e5ff;
+}
+
 .profile-header {
   display: flex;
   justify-content: space-between; /* title left, button right */
@@ -1080,7 +1260,19 @@ body.lesson-detail-page {
 
 .student-dashboard .profile-container .card-title {
   text-align: center;
-  margin: 0 auto 15px auto; /* centers + adds spacing below */
+  margin: 20px 30px;
+}
+
+body.dark-mode .card-title {
+  color: #9dc1ff;
+}
+.card {
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-height: 300px;
 }
 
 .profile-details p {
@@ -1088,6 +1280,10 @@ body.lesson-detail-page {
   margin: 12px 0;
   color: #333;
   text-align: left;   
+}
+
+body.dark-mode .profile-details p {
+  color: white;
 }
 
 .profile-footer {
@@ -1106,6 +1302,140 @@ body.lesson-detail-page {
   font-size: 20px;
   font-weight: bold;
   border-bottom: 3px solid #00142b;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.dashboard-container h2 {
+  font-size: 25px;
+  font-weight: bolder;
+  color: #09244d;
+  text-align: justify;
+  margin-bottom: 25px;
+}
+
+/* Individual section boxes */
+.course-container,
+.classroom-container {
+  flex: 1 1 45%;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+.dashboard-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  flex: 1;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card h2 {
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bolder;
+  color: #09244d;
+  margin-left: 170px;
+}
+
+.no-course {
+  text-align: center;
+  padding: 30px;
+  color: #333;
+  font-size: 16px;
+}
+
+.no-course p {
+  font-size: 20px;
+}
+
+body.dark-mode .no-course p {
+  color: white;
+}
+
+.enroll-btn {
+  display: inline-block;
+  margin-top: 15px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.enroll-btn:hover {
+  background-color: #0056b3;
+}
+
+body.dark-mode .dashboard-card {
+  background: #1f1f1f;
+  color: #e0e0e0;
+  border: 1px solid #d5e5ff;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .dashboard-card:hover {
+  box-shadow: 0 6px 16px rgba(186, 222, 255, 0.4);
+}
+
+body.dark-mode .dashboard-card h2 {
+  color: #9dc1ff; /* soft bluish tone for headings */
+}
+
+body.dark-mode .dash-card {
+  background: #1f1f1f;
+  color: #e0e0e0;
+  border: 1px solid #d5e5ff;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .dash-card:hover {
+  box-shadow: 0 6px 16px rgba(186, 222, 255, 0.4);
+}
+
+body.dark-mode .dash-card h2 {
+  color: #9dc1ff;
+}
+
+body.dark-mode .dash-card p {
+  color: white;
+}
+
+body.dark-mode a.button {
+  background-color: #007bff;
+  color: white;
+}
+
+body.dark-mode a.button:hover {
+  background-color: #0056b3;
+}
+
+body.dark-mode .unenroll-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+body.dark-mode .unenroll-btn:hover {
+  background-color: #0056b3;
 }
 
 .header-btn {
@@ -1151,8 +1481,8 @@ body.lesson-detail-page {
 }
 
 .card-title {
-  margin-bottom: 10px;
-  font-size: 1.3em;
+  margin-bottom: 20px;
+  font-size: 30px;
   font-weight: bold;
 }
 
@@ -1164,10 +1494,22 @@ body.lesson-detail-page {
 }
 
 .instructor-dashboard header {
-  background-color: #09244d; 
   color: white;
-  padding: 30px;
+  background-color: #09244d;
   font-weight: bold;
+  padding: 50px 30px 30px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-top: 0;
+
+}
+
+.instructor-dashboard .header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* spacing between toggle and user menu */
 }
 
 .instructor-dashboard h1 {
@@ -1221,4 +1563,216 @@ main {
 
 .admin-dashboard .classrooms-card tr:hover {
   background-color: #f1f1f1;
+}
+/* Container for the toggle and icons */
+.theme-toggle {
+  position: fixed;        /* Keep it fixed in place */
+  top: 15px;              /* Small space from the top */
+  right: 20px;            /* Align to the right side */
+  z-index: 1000;          /* Keep it above other elements */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  cursor: pointer; 
+}
+
+/* Switch itself */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+/* Hide default checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Background bar */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s;
+}
+
+/* Circle knob */
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 19px;
+  width: 19px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+/* Visual change when toggled */
+.switch input:checked + .slider {
+  background-color: #4a90e2;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* Updated: icon colors */
+.theme-toggle .fa-sun {
+  color: white;
+  margin-right: 10px;
+}
+
+.theme-toggle .fa-moon {
+  color: rgb(77, 77, 77);
+  margin-left: 10px;
+}
+/* ==============================
+   DARK MODE STYLES
+   ============================== */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-mode header {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+
+body.dark-mode h1 {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+
+body.dark-mode form {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode th {
+  background-color: #333;
+  color: #ffffff;
+}
+
+body.dark-mode td {
+  background-color: #1c1c1c;
+  color: #f0f0f0;
+}
+
+body.dark-mode tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+body.dark-mode tr:hover {
+  background-color: #333333;
+}
+
+body.dark-mode .center-button .button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+body.dark-mode .center-button .button:hover {
+  background-color: #2563eb;
+}
+
+body.dark-mode .theme-toggle .fa-sun {
+  color: #f5c542;
+}
+
+body.dark-mode .theme-toggle .fa-moon {
+  color: #ffffff;
+}
+
+.dashboard-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.dash-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  width: 380px;           /* slightly wider */
+  height: auto;          /* key: allow height to grow naturally */
+  min-height: 100px;     /* optional: ensures consistent base size */
+  overflow: visible;         /* makes it rectangular like instructor's */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.dash-card h2 {
+  font-size: 1.6rem;
+  color: #002b5c;
+  margin-bottom: 0.5rem;
+}
+
+.dash-card p {
+  font-size: 0.95rem;     /* smaller text */
+  margin: 0.5rem 0 1.2rem;
+  color: #555;
+}
+
+.dash-card .button {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  padding: 0.6rem 1.6rem;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.dash-card .button:hover {
+  background: #0056b3;
+}
+/* --- Remove Button Styling --- */
+.admin-dashboard .remove-btn {
+  background-color: #09244d; /* red */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.admin-dashboard .remove-btn:hover {
+  background-color: #007bff; /* darker red on hover */
+  transform: scale(1.05);
+}
+
+.admin-dashboard .remove-btn:active {
+  transform: scale(0.97);
+}
+
+/* Optional: make the Remove button column center-aligned */
+#registrationsTable td:last-child,
+#registrationsTable th:last-child {
+  text-align: center;
+  width: 100px;
 }
