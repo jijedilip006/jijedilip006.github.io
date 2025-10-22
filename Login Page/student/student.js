@@ -1,6 +1,29 @@
 //find username
 const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
+document.addEventListener("DOMContentLoaded", () => {
+  const themeCheckbox = document.querySelector(".theme-toggle input");
+  const body = document.body;
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+  }
+
+  themeCheckbox.addEventListener("change", () => {
+    if (themeCheckbox.checked) {
+      // Enable dark mode
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Disable dark mode
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
 //display username
 if (user && user.role === "student") {
   // Welcome Message
@@ -138,4 +161,104 @@ async function unenroll(courseId,userEmail) {
 }
 })();
 
+(async () => {
+  const container = document.getElementById("classroom-status");
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
+  // Fetch all classrooms the student is enrolled in
+  const { data, error } = await supabase
+    .from("classrooms")
+    .select('classroom_id, title, owner, start_date, duration, students, course_list, "Draft Mode", Archived')
+    .contains("students", JSON.stringify([user.email]));
+
+  if (error) {
+    console.error("Error fetching classrooms:", error);
+    container.textContent = "Error loading classroom info.";
+    return;
+  }
+
+  //Filter out Draft or Archived classrooms
+  const activeClassrooms = (data || []).filter(
+    (cls) => !cls["Draft Mode"] && !cls["Archived"]
+  );
+
+  if (!data || activeClassrooms.length === 0) {
+    container.innerHTML = `
+      <div class="no-classroom">
+        <p>You are not enrolled in any classroom.</p>
+        <a href="../../StudentClassroomPage/student_classroom.html" class="enroll-btn">Join a Classroom</a>
+        <a href="../../StudentAccessClassroom/student_access_classroom.html" class="enroll-btn">View all grades</a>
+      </div>
+    `;
+    return;
+  }
+
+  // Render all enrolled classrooms
+  container.innerHTML = activeClassrooms
+    .map(
+      (cls) => `
+      <div class="course-box" id="classrooms-card" style="cursor:pointer">
+        <p><strong>Classroom ID:</strong> ${cls.classroom_id}</p>
+        <p><strong>Title:</strong> ${cls.title || "Untitled"}</p>
+        <p><strong>Owner:</strong> ${cls.owner}</p>
+        <p><strong>Start Date:</strong> ${cls.start_date || "N/A"}</p>
+        <p><strong>Duration:</strong> ${cls.duration || "N/A"} week(s)</p>
+        <p><strong>Course:</strong> ${cls.course_list || "N/A"}</p>
+        <small>Click to view details</small><br>
+
+        <div style="display:flex; flex-direction:column; gap:6px; margin-top:8px;">
+          <a href="../../StudentAccessClassroom/student_access_classroom.html" class="enroll-btn">View all grades</a>
+          <button class="unenroll-btn" data-id="${cls.classroom_id}">Unenroll</button>
+        </div>
+      </div>
+    `
+    )
+    .join("");
+
+  document.querySelectorAll(".view-grades-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.location.href = `../../StudentAccessClassroom/student_access_classroom.html`;
+    });
+  });
+
+
+  // Unenroll button handler
+  document.querySelectorAll(".unenroll-btn").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      const classroomId = e.target.dataset.id;
+      if (confirm(`Are you sure you want to unenroll from ${classroomId}?`)) {
+        await unenrollClassroom(classroomId, user.email);
+      }
+    });
+  });
+})();
+
+// Remove student from classroom
+async function unenrollClassroom(classroomId, userEmail) {
+  try {
+    // Fetch current classroom data
+    const { data: classroom, error: fetchError } = await supabase
+      .from("classrooms")
+      .select("students")
+      .eq("classroom_id", classroomId)
+      .single();
+
+    if (fetchError) throw fetchError;
+
+    const updatedStudents = (classroom.students || []).filter((s) => s !== userEmail);
+
+    const { error: updateError } = await supabase
+      .from("classrooms")
+      .update({ students: updatedStudents })
+      .eq("classroom_id", classroomId);
+
+    if (updateError) throw updateError;
+
+    alert("You have been unenrolled successfully!");
+    location.reload();
+  } catch (err) {
+    console.error("Error unenrolling:", err);
+    alert("Failed to unenroll from classroom.");
+  }
+}
