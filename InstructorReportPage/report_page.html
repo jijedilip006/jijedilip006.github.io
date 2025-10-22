@@ -4,27 +4,55 @@
     <meta charset="UTF-8">
     <title>Report Page</title>
     <link rel="stylesheet" href="report_page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body class="instructor-report">
     <header>
         Learning Management System
+         <div class="theme-toggle">
+        <i class="fa-solid fa-sun"></i>
+        <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+        </label>
+        <i class="fa-solid fa-moon"></i>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </header>
 
     <h1>Progress Reports</h1>
 
     <main class="report-card">
+
         <div class="report-section">
-        <h2>Your Courses</h2>
-        <p>Number of courses created: <span id="num-courses"></span></p>
-        <p>Active courses: <span id="active-courses"></span></p>
-        <p>Archived courses: <span id="archived-courses"></span></p>
+        <h2>Your Lessons</h2>
+        <p><strong>Total lessons created:</strong> <span id="num-lessons"></span></p>
+        <p><strong>Number of published lessons:</strong> <span id="active-lessons"></span></p>
+        <p><strong>Number of archived lessons:</strong> <span id="archived-lessons"></span></p>
+        <p><strong>Number of draft lessons:</strong> <span id="draft-lessons"></span></p>
+        <p><strong>Average credit per lesson:</strong> <span id="avg-credit"></span></p>
         </div>
 
         <div class="report-section">
-        <h2>Lessons & Credits</h2>
-        <p>Average lessons per course: <span id="avg-lessons"></span></p>
-        <p>Average credit per lesson: <span id="avg-credit"></span></p>
+        <h2>Your Courses</h2>
+        <p><strong>Total courses created:</strong> <span id="num-courses"></span></p>
+        <p><strong>Number of published courses:</strong> <span id="active-courses"></span></p>
+        <p><strong>Number of archived courses:</strong> <span id="archived-courses"></span></p>
+        <p><strong>Number of draft courses:</strong> <span id="draft-courses"></span></p>
+        <p><strong>Average lesson per course:</strong> <span id="avg-courses"></span></p>
+        <p></p>
+        </div>
+
+        <div class="report-section">
+        <h2>Your Classrooms</h2>
+        <p><strong>Total classrooms created:</strong> <span id="num-classrooms"></span></p>
+        <p><strong>Number of published classrooms:</strong> <span id="active-classrooms"></span></p>
+        <p><strong>Number of archived classrooms:</strong> <span id="archived-classrooms"></span></p>
+        <p><strong>Number of draft classrooms:</strong> <span id="draft-classrooms"></span></p>
+        <p><strong>Average num of students per classroom:</strong> <span id="avg-students"></span></p>
+        <p></p>
         </div>
     </main>
 
