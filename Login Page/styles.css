@@ -893,6 +893,13 @@ body.dark-mode .course-box p {
   transition: background 0.2s ease, transform 0.15s ease;
 }
 
+.no-classroom {
+  display: flex;
+  justify-content: center; /* centers the buttons horizontally */
+  gap: 20px; /* controls space between the buttons */
+  flex-wrap: wrap; /* optional: allows wrapping on smaller screens */
+}
+
 .course-card .enroll-btn:hover {
   background: #0056b3;
   transform: translateY(-2px);
@@ -1528,15 +1535,17 @@ main {
 }
 
 .instructor-dashboard .profile-card {
-  grid-column: 1 / -1; 
   text-align: left;
+}
+
+.instructor-dashboard .profile-card p {
+  font-size: 18px;
 }
 
 /* Back button bottom-right */
 .instructor-dashboard .back-btn {
-  position: fixed;
   bottom: 20px;
-  right: 30px;
+
 }
 .admin-dashboard .classrooms-card table {
   width: 100%;
