@@ -145,7 +145,7 @@ form.addEventListener('submit', async (event) => {
     form.reset();
     // Redirect to login page after short delay
     setTimeout(() => {
-      window.location.href = '../Login page/login.html';
+      window.location.href = '/index.html';
     }, 100);
 
   } catch (err) {
