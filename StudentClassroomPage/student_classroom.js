@@ -94,9 +94,10 @@ async function loadClassrooms() {
     if (c["Draft Mode"] === true || c["Archived"] === true) return false;
 
     const list = c.course_list;
-    if (Array.isArray(list)) return list.includes(selectedCourseId);
+    const targetCourseId = String(selectedCourseId).trim()
+    if (Array.isArray(list)) return list.map(id => String(id).trim()).includes(targetCourseId);
     if (typeof list === "string") {
-      return list.split(",").map((x) => x.trim()).includes(selectedCourseId);
+      return list.split(",").map((x) => String(x).trim()).includes(targetCourseId);
     }
     return false;
     });
