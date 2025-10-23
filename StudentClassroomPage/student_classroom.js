@@ -47,7 +47,7 @@ async function loadClassrooms() {
   const { data: existing, error: existingError } = await supabase
     .from("classrooms")
     .select('classroom_id,"Draft Mode",Archived,students')
-    .contains("students", JSON.stringify([user.email]));
+    .cs("students", [user.email]);
 
   if (existingError) {
     console.error("Error checking enrollment:", existingError);
