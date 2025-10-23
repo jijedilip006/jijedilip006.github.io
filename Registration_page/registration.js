@@ -54,6 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Only redirect if no error
-        window.location.href = "../Login page/login.html";
+        window.location.href = "/index.html";
     })
 })
